@@ -1024,3 +1024,157 @@ body {
 .footer-bottom-links a:hover {
   color: var(--white);
 }
+
+
+
+/* ════════════════════════════════
+   MOBILE RESPONSIVE STYLES
+   ════════════════════════════════ */
+
+@media (max-width: 768px) {
+
+  /* ── NAVBAR ── */
+  .navbar {
+    padding: 20px 24px;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .nav-links {
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .nav-links a {
+    font-size: 12px;
+  }
+
+  /* ── EVENT BANNER ── */
+  .event-banner {
+    padding: 12px 24px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 60px 24px;
+    min-height: 70vh;
+  }
+
+  .hero-title {
+    font-size: 38px;
+  }
+
+  .hero-sub {
+    font-size: 16px;
+  }
+
+  /* ── SECTION SHARED ── */
+  .section-title {
+    font-size: 30px;
+  }
+
+  .classes,
+  .about,
+  .instructors,
+  .workshops {
+    padding: 60px 24px;
+  }
+
+  /* ── CLASSES GRID ── */
+  .classes-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* ── CLASS CARDS — always show info on mobile ── */
+  .card-content {
+    padding-top: 24px;
+  }
+
+  .card-lottie-wrap {
+    position: relative;
+    margin-bottom: 16px;
+  }
+
+  .class-card:hover .card-content {
+    transform: none;
+  }
+
+  .card-hover-info {
+    opacity: 1;
+    transform: none;
+  }
+
+  .class-card:hover .card-lottie-wrap {
+    transform: none;
+  }
+
+  /* ── FLO KIDS ── */
+  .kids-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .kids-card {
+    flex-direction: column;
+  }
+
+  /* ── ABOUT ── */
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .about-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* ── INSTRUCTORS ── */
+  .instructors-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* ── WORKSHOPS ── */
+  .workshop-item {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .workshop-left {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .workshop-right {
+    align-items: flex-start;
+  }
+
+  .workshop-item:hover {
+    margin: 0;
+    padding: 36px 0;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    padding: 60px 24px 0;
+  }
+
+  .footer-top {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .footer-bottom-links {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+}
