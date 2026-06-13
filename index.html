@@ -16,8 +16,69 @@
                 <li><a href="#about">About</a></li>
                 <li><a href="#classes">Classes</a></li>
                 <li><a href="#contact">Contact</a></li>
-                </ul>
+            </ul>
+            <button class="btn btn-login" id="loginBtn">Login</button>
         </nav>
+        <!-- ═══════════════════════════════════════════
+            LOGIN MODAL
+            Shown when user clicks "Login" in navbar.
+            Hidden by default — JS adds/removes .modal-open
+        ════════════════════════════════════════════ -->
+        <div class="modal-overlay" id="loginModal">
+            <div class="modal-box">
+                <button class="modal-close" id="modalClose">✕</button>
+                <div class="modal-logo">FLO Studio</div>
+                <p class="modal-tagline">Welcome back.</p>
+
+                <div class="login-role-tabs">
+                    <button class="role-tab active" data-role="client">Client</button>
+                    <button class="role-tab" data-role="instructor">Instructor</button>
+                    <button class="role-tab" data-role="admin">Admin</button>
+                </div>
+
+                <div class="login-fields">
+                    <input type="email" placeholder="Email address" id="loginEmail" />
+                    <input type="password" placeholder="Password" id="loginPassword" />
+                    <button class="btn btn-login-submit" id="loginSubmit">Enter →</button>
+                </div>
+
+                <p class="login-hint" id="loginHint"></p>
+                <div class="login-demo-creds">
+                    <p class="demo-creds-title">Demo logins</p>
+                    <p>client@flo.mv · client123</p>
+                    <p>instructor@flo.mv · instructor123</p>
+                    <p>admin@flo.mv · admin123</p>
+                </div>
+            </div>
+        </div>
+        <!-- ═══════════════════════════════════════════
+             PAYMENT CONFIRMATION MODAL
+             Shown when client clicks "Confirm & Enrol"
+        ════════════════════════════════════════════ -->
+        <div class="modal-overlay" id="paymentModal">
+            <div class="modal-box">
+                <button class="modal-close" id="paymentModalClose">✕</button>
+
+                <div class="modal-logo">FLO Studio</div>
+                <p class="modal-tagline">Almost there.</p>
+
+                <div class="payment-modal-summary" id="paymentSummary">
+                    <!-- Filled in by JS -->
+                </div>
+
+                <p class="payment-modal-instruction">
+                    To confirm your enrolment, please complete payment using the button below.
+                </p>
+
+                <a href="#" class="btn-payment" id="btnPayNow">
+                    Pay Now →
+                </a>
+
+                <p class="payment-modal-note">
+                    Clicking will take you to the Bank of Maldives Payment Gateway.
+                </p>
+            </div>
+        </div>
         <!-- HERO -->
         <section class="hero">
             <div class="hero-content">
@@ -734,7 +795,788 @@
         </div>
 
         </footer>
+        <!-- ═══════════════════════════════════════════════════════════════
+            CLIENT PORTAL
+            Hidden by default. Activated by JS when a client logs in.
+            Sub-views: Dashboard · My Classes · Schedule · Membership · Settings
+        ═══════════════════════════════════════════════════════════════════ -->
+        <div class="portal" id="clientPortal">
+
+            <!-- CLIENT NAVBAR (replaces public navbar when portal is active) -->
+            <nav class="portal-nav">
+                <div class="portal-nav-logo">FLO Studio</div>
+                <div class="portal-nav-right">
+                    <span class="portal-nav-user">Sara Rasheed</span>
+                    <button class="btn btn-logout" id="clientLogout">Logout</button>
+                </div>
+            </nav>
+
+            <!-- PORTAL BODY: sidebar + main content -->
+            <div class="portal-body">
+
+                <!-- SIDEBAR -->
+                <aside class="portal-sidebar">
+                    <nav class="sidebar-nav">
+                        <button class="sidebar-link active" data-view="dashboard">
+                            <span class="sidebar-icon">◈</span> Dashboard
+                        </button>
+                        <button class="sidebar-link" data-view="my-classes">
+                            <span class="sidebar-icon">◎</span> My Classes
+                        </button>
+                        <button class="sidebar-link" data-view="schedule">
+                            <span class="sidebar-icon">◷</span> Schedule
+                        </button>
+                        <button class="sidebar-link" data-view="membership">
+                            <span class="sidebar-icon">◇</span> Membership
+                        </button>
+                        <button class="sidebar-link" data-view="settings">
+                            <span class="sidebar-icon">⊙</span> Settings
+                        </button>
+                    </nav>
+                </aside>
+
+                <!-- MAIN CONTENT AREA -->
+                <main class="portal-main">
+
+                    <!-- ── VIEW: DASHBOARD ── -->
+                    <section class="portal-view active" id="view-dashboard">
+                        <div class="portal-view-header">
+                            <h2>Good morning, Sara.</h2>
+                            <p class="portal-view-sub">Here's what's on your journey this week.</p>
+                        </div>
+
+                        <!-- STAT CARDS -->
+
+                        <div class="portal-stats">
+                            <div class="stat-card">
+                                <p class="stat-label">Enrolment</p>
+                                <p class="stat-value">Active</p>
+                                <p class="stat-detail">Expires 01 Feb 2025</p>
+                            </div>
+                            <div class="stat-card">
+                                <p class="stat-label">Classes This Month</p>
+                                <p class="stat-value">8 <span class="stat-value-small">of 12</span></p>
+                                <p class="stat-detail">4 classes remaining</p>
+                            </div>
+                            <div class="stat-card stat-card--next-class">
+                                <p class="stat-label">Next Class</p>
+                                <p class="stat-value">Flow</p>
+                                <p class="stat-next-when">Mon · 7:00 AM</p>
+                                <p class="stat-detail">Studio 1 · with Aisha</p>
+                            </div>
+                            <div class="stat-card stat-card--highlight">
+                                <p class="stat-label">Upcoming Event</p>
+                                <p class="stat-value">Breathwork</p>
+                                <p class="stat-detail">Sat 14 Feb · 4:00 PM</p>
+                            </div>
+                        </div>
+
+                        <!-- UPCOMING CLASSES -->
+                        <div class="portal-section">
+                            <h3 class="portal-section-title">Upcoming Classes</h3>
+                            <div class="booking-list">
+                                <div class="booking-item">
+                                    <div class="booking-dot booking-dot--teal"></div>
+                                    <div class="booking-info">
+                                        <p class="booking-name">Flow</p>
+                                        <p class="booking-meta">Vinyasa Yoga · Mon 20 Jan · 7:00 AM · Studio 1</p>
+                                    </div>
+                                    <span class="booking-status status--confirmed">Confirmed</span>
+                                </div>
+                                <div class="booking-item">
+                                    <div class="booking-dot booking-dot--teal"></div>
+                                    <div class="booking-info">
+                                        <p class="booking-name">Sculpt</p>
+                                        <p class="booking-meta">Mat Pilates · Wed 22 Jan · 9:00 AM · Studio 2</p>
+                                    </div>
+                                    <span class="booking-status status--confirmed">Confirmed</span>
+                                </div>
+                                <div class="booking-item">
+                                    <div class="booking-dot booking-dot--teal"></div>
+                                    <div class="booking-info">
+                                        <p class="booking-name">Flow</p>
+                                        <p class="booking-meta">Vinyasa Yoga · Thu 23 Jan · 6:00 AM · Studio 1</p>
+                                    </div>
+                                    <span class="booking-status status--confirmed">Confirmed</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- QUICK ACTIONS -->
+                        <div class="portal-section">
+                            <h3 class="portal-section-title">Quick Actions</h3>
+                            <div class="quick-actions">
+                                <button class="quick-action-btn" data-view="schedule">+ Book a Class</button>
+                                <button class="quick-action-btn" data-view="membership">View Membership</button>
+                                <button class="quick-action-btn" data-view="my-classes">My History</button>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- ── VIEW: MY CLASSES ── -->
+                    <section class="portal-view" id="view-my-classes">
+                        <div class="portal-view-header">
+                            <h2>My Classes</h2>
+                            <p class="portal-view-sub">Your booking history and upcoming sessions.</p>
+                        </div>
+
+                        <div class="portal-section">
+                            <h3 class="portal-section-title">Upcoming</h3>
+                            <div class="booking-list">
+                                <div class="booking-item">
+                                    <div class="booking-dot booking-dot--teal"></div>
+                                    <div class="booking-info">
+                                        <p class="booking-name">Flow</p>
+                                        <p class="booking-meta">Mon 20 Jan · 7:00 AM · with Aisha</p>
+                                    </div>
+                                    <button class="btn-cancel">Cancel</button>
+                                </div>
+                                <div class="booking-item">
+                                    <div class="booking-dot booking-dot--teal"></div>
+                                    <div class="booking-info">
+                                        <p class="booking-name">Sculpt</p>
+                                        <p class="booking-meta">Wed 22 Jan · 9:00 AM · with Nadia</p>
+                                    </div>
+                                    <button class="btn-cancel">Cancel</button>
+                                </div>
+                                <div class="booking-item">
+                                    <div class="booking-dot booking-dot--teal"></div>
+                                    <div class="booking-info">
+                                        <p class="booking-name">Soar</p>
+                                        <p class="booking-meta">Thu 23 Jan · 9:00 AM · with Hana</p>
+                                    </div>
+                                    <button class="btn-cancel">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="portal-section">
+                            <h3 class="portal-section-title">Past Classes</h3>
+                            <div class="booking-list">
+                                <div class="booking-item booking-item--past">
+                                    <div class="booking-dot booking-dot--muted"></div>
+                                    <div class="booking-info">
+                                        <p class="booking-name">Pulse</p>
+                                        <p class="booking-meta">Thu 16 Jan · 6:00 PM · with Aisha</p>
+                                    </div>
+                                    <span class="booking-status status--attended">Attended</span>
+                                </div>
+                                <div class="booking-item booking-item--past">
+                                    <div class="booking-dot booking-dot--muted"></div>
+                                    <div class="booking-info">
+                                        <p class="booking-name">Flow</p>
+                                        <p class="booking-meta">Mon 13 Jan · 7:00 AM · with Aisha</p>
+                                    </div>
+                                    <span class="booking-status status--attended">Attended</span>
+                                </div>
+                                <div class="booking-item booking-item--past">
+                                    <div class="booking-dot booking-dot--muted"></div>
+                                    <div class="booking-info">
+                                        <p class="booking-name">Ground</p>
+                                        <p class="booking-meta">Sat 11 Jan · 8:00 AM · with Lara</p>
+                                    </div>
+                                    <span class="booking-status status--attended">Attended</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- ── VIEW: SCHEDULE ── -->
+                    <section class="portal-view" id="view-schedule">
+                        <div class="portal-view-header">
+                            <h2>Enrol for February</h2>
+                            <p class="portal-view-sub">Pick your classes for the month. Slots are limited — enrol early.</p>
+                        </div>
+
+
+
+                        <!-- TABS: Adult / Kids -->
+                        <div class="enrol-tabs">
+                            <button class="enrol-tab active" data-enrol="adult">Adult Classes</button>
+                            <button class="enrol-tab" data-enrol="kids">Kids Classes</button>
+                        </div>
+
+                        <!-- ══ ADULT TIMETABLE ══ -->
+                        <div class="enrol-panel active" id="enrol-adult">
+                                                    <!-- ENROLMENT STATUS BANNER -->
+                            <div class="enrol-status-banner enrol-status--open">
+                                <div class="enrol-status-left">
+                                    <span class="enrol-status-dot"></span>
+                                    <div>
+                                        <p class="enrol-status-title">Enrolment is open</p>
+                                        <p class="enrol-status-sub">February 2025 · Closes 31 Jan or when slots fill up</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="timetable-wrap">
+
+                                <!-- TIMETABLE GRID -->
+                                <div class="timetable">
+
+                                    <!-- Header row -->
+                                    <div class="tt-cell tt-corner"></div>
+                                    <div class="tt-cell tt-head">Sun</div>
+                                    <div class="tt-cell tt-head">Mon</div>
+                                    <div class="tt-cell tt-head">Tue</div>
+                                    <div class="tt-cell tt-head">Wed</div>
+                                    <div class="tt-cell tt-head">Thu</div>
+                                    <div class="tt-cell tt-head">Sat</div>
+
+                                    <!-- 6:00 AM row -->
+                                    <div class="tt-cell tt-time">6:00 AM</div>
+                                    <div class="tt-cell">
+                                        <button class="tt-slot available"
+                                            data-class="Flow" data-day="Sun" data-time="6:00 AM"
+                                            data-price="350" data-spots="4">
+                                            <span class="tt-slot-name">Flow</span>
+                                            <span class="tt-slot-meta">4 spots</span>
+                                        </button>
+                                    </div>
+                                    <div class="tt-cell">
+                                        <button class="tt-slot available"
+                                            data-class="Flow" data-day="Mon" data-time="6:00 AM"
+                                            data-price="350" data-spots="2">
+                                            <span class="tt-slot-name">Flow</span>
+                                            <span class="tt-slot-meta">2 spots</span>
+                                        </button>
+                                    </div>
+                                    <div class="tt-cell tt-empty">—</div>
+                                    <div class="tt-cell tt-empty">—</div>
+                                    <div class="tt-cell">
+                                        <button class="tt-slot available"
+                                            data-class="Flow" data-day="Thu" data-time="6:00 AM"
+                                            data-price="350" data-spots="5">
+                                            <span class="tt-slot-name">Flow</span>
+                                            <span class="tt-slot-meta">5 spots</span>
+                                        </button>
+                                    </div>
+                                    <div class="tt-cell tt-empty">—</div>
+
+                                    <!-- 4:00 PM row -->
+                                    <div class="tt-cell tt-time">4:00 PM</div>
+                                    <div class="tt-cell tt-empty">—</div>
+                                    <div class="tt-cell">
+                                        <button class="tt-slot available"
+                                            data-class="Pulse" data-day="Mon" data-time="4:00 PM"
+                                            data-price="600" data-spots="6">
+                                            <span class="tt-slot-name">Pulse</span>
+                                            <span class="tt-slot-meta">6 spots</span>
+                                        </button>
+                                    </div>
+                                    <div class="tt-cell tt-empty">—</div>
+                                    <div class="tt-cell">
+                                        <button class="tt-slot available"
+                                            data-class="Pulse" data-day="Wed" data-time="4:00 PM"
+                                            data-price="600" data-spots="3">
+                                            <span class="tt-slot-name">Pulse</span>
+                                            <span class="tt-slot-meta">3 spots</span>
+                                        </button>
+                                    </div>
+                                    <div class="tt-cell tt-empty">—</div>
+                                    <div class="tt-cell">
+                                        <button class="tt-slot available"
+                                            data-class="Sculpt" data-day="Sat" data-time="4:00 PM"
+                                            data-price="450" data-spots="4">
+                                            <span class="tt-slot-name">Sculpt</span>
+                                            <span class="tt-slot-meta">4 spots</span>
+                                        </button>
+                                    </div>
+
+                                    <!-- 6:00 PM row -->
+                                    <div class="tt-cell tt-time">6:00 PM</div>
+                                    <div class="tt-cell tt-empty">—</div>
+                                    <div class="tt-cell tt-empty">—</div>
+                                    <div class="tt-cell">
+                                        <button class="tt-slot available"
+                                            data-class="Soar" data-day="Tue" data-time="6:00 PM"
+                                            data-price="800" data-spots="3">
+                                            <span class="tt-slot-name">Soar</span>
+                                            <span class="tt-slot-meta">3 spots</span>
+                                        </button>
+                                    </div>
+                                    <div class="tt-cell">
+                                        <button class="tt-slot full"
+                                            data-class="Reform" data-day="Wed" data-time="6:00 PM"
+                                            data-price="500" data-spots="0" disabled>
+                                            <span class="tt-slot-name">Reform</span>
+                                            <span class="tt-slot-meta">Full</span>
+                                        </button>
+                                    </div>
+                                    <div class="tt-cell tt-empty">—</div>
+                                    <div class="tt-cell">
+                                        <button class="tt-slot available"
+                                            data-class="Flow" data-day="Sat" data-time="6:00 PM"
+                                            data-price="350" data-spots="5">
+                                            <span class="tt-slot-name">Flow</span>
+                                            <span class="tt-slot-meta">5 spots</span>
+                                        </button>
+                                    </div>
+
+                                    <!-- 8:00 PM row -->
+                                    <div class="tt-cell tt-time">8:00 PM</div>
+                                    <div class="tt-cell tt-empty">—</div>
+                                    <div class="tt-cell">
+                                        <button class="tt-slot available"
+                                            data-class="Ground" data-day="Mon" data-time="8:00 PM"
+                                            data-price="400" data-spots="7">
+                                            <span class="tt-slot-name">Ground</span>
+                                            <span class="tt-slot-meta">7 spots</span>
+                                        </button>
+                                    </div>
+                                    <div class="tt-cell tt-empty">—</div>
+                                    <div class="tt-cell">
+                                        <button class="tt-slot available"
+                                            data-class="Ground" data-day="Wed" data-time="8:00 PM"
+                                            data-price="400" data-spots="2">
+                                            <span class="tt-slot-name">Ground</span>
+                                            <span class="tt-slot-meta">2 spots</span>
+                                        </button>
+                                    </div>
+                                    <div class="tt-cell tt-empty">—</div>
+                                    <div class="tt-cell tt-empty">—</div>
+
+                                </div>
+                                <!-- END TIMETABLE GRID -->
+
+                            </div>
+
+                            <!-- COLOUR LEGEND -->
+                            <div class="tt-legend">
+                                <span class="legend-item"><span class="legend-dot ld-available"></span> Available</span>
+                                <span class="legend-item"><span class="legend-dot ld-selected"></span> Selected</span>
+                                <span class="legend-item"><span class="legend-dot ld-full"></span> Full</span>
+                            </div>
+                        </div>
+                        <!-- END ADULT PANEL -->
+
+                        <!-- ══ KIDS CLASSES ══ (placeholder for now) -->
+                        <div class="enrol-panel" id="enrol-kids">
+                            <p style="padding: 40px 0; color: var(--text-light); font-size:14px;">
+                                Kids classes coming in the next step.
+                            </p>
+                        </div>
+
+                        <!-- SELECTION SIDEBAR -->
+                        <div class="enrol-sidebar" id="enrolSidebar">
+                            <div class="enrol-sidebar-inner">
+                                <p class="enrol-sidebar-title">Your Selection</p>
+                                <p class="enrol-sidebar-month">February 2025</p>
+
+                                <div class="enrol-list" id="enrolList">
+                                    <p class="enrol-empty" id="enrolEmpty">No classes selected yet.</p>
+                                </div>
+
+                                <div class="enrol-total-row">
+                                    <span>Total</span>
+                                    <span class="enrol-total" id="enrolTotal">MVR 0</span>
+                                </div>
+
+                                <button class="btn-enrol" id="btnEnrol" disabled>Confirm &amp; Enrol</button>
+                                <p class="enrol-note">You will be contacted to arrange payment.</p>
+                            </div>
+                        </div>
+
+                    </section>
+                    <!-- END SCHEDULE VIEW ══════════════════════════════ -->
+
+                    <!-- ── VIEW: MEMBERSHIP ── -->
+                    <section class="portal-view" id="view-membership">
+                        <div class="portal-view-header">
+                            <h2>My Enrolment</h2>
+                            <p class="portal-view-sub">Your current classes for this month.</p>
+                        </div>
+
+                        <!-- CURRENT MONTH ENROLMENT -->
+                        <div class="portal-section">
+                            <div class="membership-card">
+                                <div class="membership-card-top">
+                                    <div>
+                                        <p class="membership-plan-label">January 2025</p>
+                                        <p class="membership-plan-name">3 classes enrolled</p>
+                                    </div>
+                                    <span class="membership-badge">Active</span>
+                                </div>
+
+                                <!-- ENROLLED CLASSES BREAKDOWN -->
+                                <div class="membership-details">
+                                    <div class="membership-detail-row">
+                                        <span class="enrol-breakdown-name">Flow <span class="enrol-breakdown-days">· Mon &amp; Thu 6:00 AM</span></span>
+                                        <span>2 × MVR 350 = MVR 700</span>
+                                    </div>
+                                    <div class="membership-detail-row">
+                                        <span class="enrol-breakdown-name">Pulse <span class="enrol-breakdown-days">· Wed 4:00 PM</span></span>
+                                        <span>1 × MVR 600 = MVR 600</span>
+                                    </div>
+                                    <div class="membership-detail-row membership-total-row">
+                                        <span>Total paid</span>
+                                        <span class="membership-total-value">MVR 1,300</span>
+                                    </div>
+                                </div>
+
+                                <!-- ATTENDANCE PROGRESS -->
+                                <div class="membership-progress-wrap">
+                                    <div class="membership-progress-label">
+                                        <span>Classes attended</span>
+                                        <span>8 of 12</span>
+                                    </div>
+                                    <div class="membership-progress-bar">
+                                        <div class="membership-progress-fill" style="width: 66%"></div>
+                                    </div>
+                                    <p class="membership-progress-sub">4 classes remaining · Expires 31 Jan 2025</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- NEXT MONTH NOTICE -->
+                        <div class="portal-section">
+                            <div class="enrol-status-banner enrol-status--upcoming">
+                                <div class="enrol-status-left">
+                                    <span class="enrol-status-dot"></span>
+                                    <div>
+                                        <p class="enrol-status-title">February enrolment opens 20 Jan</p>
+                                        <p class="enrol-status-sub">Head to the Schedule tab to pick your classes for next month.</p>
+                                    </div>
+                                </div>
+                                <button class="quick-action-btn" data-view="schedule">Enrol Now →</button>
+                            </div>
+                        </div>
+
+                    </section>
+
+                    <!-- ── VIEW: SETTINGS ── -->
+                    <section class="portal-view" id="view-settings">
+                        <div class="portal-view-header">
+                            <h2>Settings</h2>
+                            <p class="portal-view-sub">Manage your profile and preferences.</p>
+                        </div>
+
+                        <div class="portal-section">
+                            <h3 class="portal-section-title">Profile</h3>
+                            <div class="settings-form">
+                                <div class="settings-field">
+                                    <label>Full Name</label>
+                                    <input type="text" value="Sara Rasheed" />
+                                </div>
+                                <div class="settings-field">
+                                    <label>Email</label>
+                                    <input type="email" value="client@flo.mv" />
+                                </div>
+                                <div class="settings-field">
+                                    <label>Phone / WhatsApp</label>
+                                    <input type="text" value="+960 777 0000" />
+                                </div>
+                                <div class="settings-field">
+                                    <label>Emergency Contact</label>
+                                    <input type="text" placeholder="Name · Number" />
+                                </div>
+                                <button class="btn btn-save">Save Changes</button>
+                            </div>
+                        </div>
+
+                        <div class="portal-section">
+                            <h3 class="portal-section-title">Notifications</h3>
+                            <div class="settings-toggles">
+                                <div class="toggle-row">
+                                    <div>
+                                        <p class="toggle-label">Class reminders</p>
+                                        <p class="toggle-sub">WhatsApp reminder 1 hour before class</p>
+                                    </div>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" checked />
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                </div>
+                                <div class="toggle-row">
+                                    <div>
+                                        <p class="toggle-label">Enrolment reminders</p>
+                                        <p class="toggle-sub">Remind me when next month's enrolment opens</p>
+                                    </div>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" checked />
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                </div>
+                                <div class="toggle-row">
+                                    <div>
+                                        <p class="toggle-label">Event announcements</p>
+                                        <p class="toggle-sub">New workshops, retreats, and special sessions</p>
+                                    </div>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" />
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                </main>
+            </div>
+        </div>
+        <!-- END CLIENT PORTAL ══════════════════════════════════════════════ -->
+
+        <!-- ═══════════════════════════════════════════
+            INSTRUCTOR PORTAL
+        ════════════════════════════════════════════ -->
+        <div class="portal" id="instructorPortal">
+            <p style="padding:60px; font-size:24px;">Instructor Portal — coming soon</p>
+        </div>
+
+        <!-- ═══════════════════════════════════════════
+            ADMIN PORTAL
+        ════════════════════════════════════════════ -->
+        <div class="portal" id="adminPortal">
+            <p style="padding:60px; font-size:24px;">Admin Portal — coming soon</p>
+        </div>
         <script>
+            // ── DUMMY CREDENTIALS ──────────────────────────
+            // These are placeholder logins. In a real app, this
+            // would be checked against a server/database.
+            const USERS = {
+            'client@flo.mv':     { password: 'client123',     role: 'client' },
+            'instructor@flo.mv': { password: 'instructor123',  role: 'instructor' },
+            'admin@flo.mv':      { password: 'admin123',       role: 'admin' },
+            };
+
+            // ── ELEMENTS ───────────────────────────────────
+            const loginBtn    = document.getElementById('loginBtn');
+            const loginModal  = document.getElementById('loginModal');
+            const modalClose  = document.getElementById('modalClose');
+            const loginSubmit = document.getElementById('loginSubmit');
+            const loginHint   = document.getElementById('loginHint');
+            const publicSite  = document.querySelector('body');  // we'll target sections
+
+            // All the portals and the public-facing sections
+            const clientPortal     = document.getElementById('clientPortal');
+            const instructorPortal = document.getElementById('instructorPortal');
+            const adminPortal      = document.getElementById('adminPortal');
+
+            // Public sections (everything visible before login)
+            const publicSections = document.querySelectorAll(
+            '.hero, .event-banner, .classes, .about, .instructors, .pricing, .schedule, .workshops, .footer'
+            );
+
+            // ── MODAL OPEN / CLOSE ─────────────────────────
+            loginBtn.addEventListener('click', function() {
+            loginModal.classList.add('modal-open');
+            });
+
+            modalClose.addEventListener('click', function() {
+            loginModal.classList.remove('modal-open');
+            loginHint.textContent = '';
+            });
+
+            // Close modal if user clicks the dark backdrop
+            loginModal.addEventListener('click', function(e) {
+            if (e.target === loginModal) {
+                loginModal.classList.remove('modal-open');
+            }
+            });
+
+            // ── ROLE TABS ──────────────────────────────────
+            document.querySelectorAll('.role-tab').forEach(function(tab) {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.role-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+            });
+            });
+
+            // ── LOGIN LOGIC ────────────────────────────────
+            loginSubmit.addEventListener('click', function() {
+            const email    = document.getElementById('loginEmail').value.trim();
+            const password = document.getElementById('loginPassword').value;
+            const user     = USERS[email];
+
+            if (!user || user.password !== password) {
+                loginHint.textContent = 'Incorrect email or password.';
+                return;
+            }
+
+            // Close modal
+            loginModal.classList.remove('modal-open');
+            loginHint.textContent = '';
+
+
+            // Hide all public sections including the navbar
+            publicSections.forEach(s => s.style.display = 'none');
+            document.querySelector('.navbar').style.display = 'none';
+
+            // Show the right portal
+            if (user.role === 'client')     clientPortal.classList.add('portal-active');
+            if (user.role === 'instructor') instructorPortal.classList.add('portal-active');
+            if (user.role === 'admin')      adminPortal.classList.add('portal-active');
+
+            // Change navbar login button to show who's in
+            loginBtn.textContent = 'Logout';
+            loginBtn.onclick = function() { location.reload(); }; // reload to "log out"
+            });
+
+                        // ── CLIENT PORTAL SIDEBAR NAVIGATION ───────────
+            // When a sidebar button is clicked:
+            // 1. Remove "active" from all sidebar links
+            // 2. Add "active" to the clicked one
+            // 3. Hide all portal views
+            // 4. Show the matching portal view
+
+            document.querySelectorAll('.sidebar-link').forEach(function(link) {
+            link.addEventListener('click', function() {
+                const targetView = this.getAttribute('data-view');
+
+                // Update sidebar active state
+                document.querySelectorAll('.sidebar-link').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+
+                // Switch views
+                document.querySelectorAll('.portal-view').forEach(v => v.classList.remove('active'));
+                document.getElementById('view-' + targetView).classList.add('active');
+            });
+            });
+
+            // ══════════════════════════════════════════════════
+            // ENROLMENT SYSTEM — Adult Timetable
+            // ══════════════════════════════════════════════════
+
+            // This object holds the client's current selections.
+            // Keys are a unique slot ID (class + day + time),
+            // values are the slot's data.
+            const enrolment = {};
+
+            function getSlotId(btn) {
+                // Build a unique ID from the slot's data attributes
+                // e.g. "Flow-Mon-6:00 AM"
+                return btn.dataset.class + '-' + btn.dataset.day + '-' + btn.dataset.time;
+            }
+
+            function updateEnrolSidebar() {
+                const list   = document.getElementById('enrolList');
+                const total  = document.getElementById('enrolTotal');
+                const btnEnrol = document.getElementById('btnEnrol');
+                const empty  = document.getElementById('enrolEmpty');
+
+                const items = Object.values(enrolment);
+
+                if (items.length === 0) {
+                    list.innerHTML = '';
+                    list.appendChild(empty);
+                    empty.style.display = 'block';
+                    total.textContent = 'MVR 0';
+                    btnEnrol.disabled = true;
+                    return;
+                }
+
+                // Build the list HTML
+                list.innerHTML = '';
+                let runningTotal = 0;
+
+                items.forEach(function(item) {
+                    runningTotal += parseInt(item.price);
+
+                    const div = document.createElement('div');
+                    div.className = 'enrol-item';
+                    div.innerHTML = `
+                        <div class="enrol-item-info">
+                            <span class="enrol-item-name">${item.className}</span>
+                            <span class="enrol-item-day">${item.day} · ${item.time}</span>
+                        </div>
+                        <span class="enrol-item-price">MVR ${item.price}</span>
+                    `;
+                    list.appendChild(div);
+                });
+
+                total.textContent = 'MVR ' + runningTotal.toLocaleString();
+                btnEnrol.disabled = false;
+            }
+
+            // Attach click listeners to every timetable slot
+            document.querySelectorAll('.tt-slot.available, .tt-slot.selected').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    const id = getSlotId(this);
+
+                    if (this.classList.contains('selected')) {
+                        // Deselect — remove from enrolment
+                        this.classList.remove('selected');
+                        this.classList.add('available');
+                        this.querySelector('.tt-slot-meta').textContent = this.dataset.spots + ' spots';
+                        delete enrolment[id];
+                    } else {
+                        // Select — add to enrolment
+                        this.classList.remove('available');
+                        this.classList.add('selected');
+                        this.querySelector('.tt-slot-meta').textContent = 'Selected';
+                        enrolment[id] = {
+                            className: this.dataset.class,
+                            day:       this.dataset.day,
+                            time:      this.dataset.time,
+                            price:     this.dataset.price
+                        };
+                    }
+
+                    updateEnrolSidebar();
+                });
+            });
+
+            // Confirm button — shows payment modal
+            document.getElementById('btnEnrol').addEventListener('click', function() {
+                const items  = Object.values(enrolment);
+                const total  = items.reduce((sum, i) => sum + parseInt(i.price), 0);
+                const summary = document.getElementById('paymentSummary');
+
+                // Build the summary rows from the current selection
+                summary.innerHTML =
+                    items.map(function(item) {
+                        return '<div class="payment-summary-row">' +
+                            '<span>' + item.className + ' · ' + item.day + ' · ' + item.time + '</span>' +
+                            '<span>MVR ' + parseInt(item.price).toLocaleString() + '</span>' +
+                        '</div>';
+                    }).join('') +
+                    '<div class="payment-summary-total">' +
+                        '<span>Total</span>' +
+                        '<span>MVR ' + total.toLocaleString() + '</span>' +
+                    '</div>';
+
+                // Show the modal
+                document.getElementById('paymentModal').classList.add('modal-open');
+            });
+
+            // Close payment modal
+            document.getElementById('paymentModalClose').addEventListener('click', function() {
+                document.getElementById('paymentModal').classList.remove('modal-open');
+            });
+
+            document.getElementById('paymentModal').addEventListener('click', function(e) {
+                if (e.target === this) this.classList.remove('modal-open');
+            });
+
+            // ── ENROLMENT TABS (Adult / Kids) ──────────────────
+            document.querySelectorAll('.enrol-tab').forEach(function(tab) {
+                tab.addEventListener('click', function() {
+                    document.querySelectorAll('.enrol-tab').forEach(t => t.classList.remove('active'));
+                    document.querySelectorAll('.enrol-panel').forEach(p => p.classList.remove('active'));
+                    this.classList.add('active');
+                    document.getElementById('enrol-' + this.dataset.enrol).classList.add('active');
+                });
+            });
+
+            // ── QUICK ACTION BUTTONS ────────────────────────
+            // These also navigate to a view, same logic
+            document.querySelectorAll('.quick-action-btn').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                const targetView = this.getAttribute('data-view');
+
+                document.querySelectorAll('.sidebar-link').forEach(l => l.classList.remove('active'));
+                document.querySelector('[data-view="' + targetView + '"].sidebar-link').classList.add('active');
+
+                document.querySelectorAll('.portal-view').forEach(v => v.classList.remove('active'));
+                document.getElementById('view-' + targetView).classList.add('active');
+            });
+            });
+
+            // ── CLIENT LOGOUT ───────────────────────────────
+            document.getElementById('clientLogout').addEventListener('click', function() {
+            location.reload();
+            });
+
             document.querySelectorAll('.class-card').forEach(function(card) {
                 var el = card.querySelector('.class-lottie');
                 var anim = lottie.loadAnimation({
