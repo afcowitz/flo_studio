@@ -1141,6 +1141,10 @@
 
                             </div>
 
+                            <!-- MOBILE SCHEDULE LIST -->
+                            <!-- Populated by JS on small screens -->
+                            <div class="mobile-schedule" id="mobileSchedule"></div>
+
                             <!-- COLOUR LEGEND -->
                             <div class="tt-legend">
                                 <span class="legend-item"><span class="legend-dot ld-available"></span> Available</span>
@@ -1375,12 +1379,27 @@
             });
 
             // ── ROLE TABS ──────────────────────────────────
+            const demoCredentials = {
+            client:     { email: 'client@flo.mv',     password: 'client123' },
+            instructor: { email: 'instructor@flo.mv', password: 'instructor123' },
+            admin:      { email: 'admin@flo.mv',      password: 'admin123' }
+            };
+
             document.querySelectorAll('.role-tab').forEach(function(tab) {
             tab.addEventListener('click', function() {
                 document.querySelectorAll('.role-tab').forEach(t => t.classList.remove('active'));
                 this.classList.add('active');
+
+                // Auto-fill credentials for the selected role
+                const role = this.dataset.role;
+                document.getElementById('loginEmail').value    = demoCredentials[role].email;
+                document.getElementById('loginPassword').value = demoCredentials[role].password;
             });
             });
+
+            // Pre-fill client credentials on page load (default tab is client)
+            document.getElementById('loginEmail').value    = demoCredentials.client.email;
+            document.getElementById('loginPassword').value = demoCredentials.client.password;
 
             // ── LOGIN LOGIC ────────────────────────────────
             loginSubmit.addEventListener('click', function() {
@@ -1548,6 +1567,90 @@
                 if (e.target === this) this.classList.remove('modal-open');
             });
 
+            // ══════════════════════════════════════════════════
+            // MOBILE SCHEDULE — vertical list view
+            // Reads slot data from the existing grid buttons
+            // and renders a day-grouped list for small screens
+            // ══════════════════════════════════════════════════
+
+            function buildMobileSchedule() {
+                const container = document.getElementById('mobileSchedule');
+                if (!container) return;
+
+                // Collect all slot buttons from the grid
+                const slots = document.querySelectorAll('.timetable .tt-slot');
+
+                // Group by day — preserve day order
+                const dayOrder = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Sat'];
+                const byDay = {};
+                dayOrder.forEach(d => byDay[d] = []);
+
+                slots.forEach(function(btn) {
+                    const day = btn.dataset.day;
+                    if (byDay[day] !== undefined) {
+                        byDay[day].push(btn);
+                    }
+                });
+
+                // Build the HTML
+                container.innerHTML = '';
+
+                dayOrder.forEach(function(day) {
+                    if (byDay[day].length === 0) return;
+
+                    const block = document.createElement('div');
+                    block.className = 'ms-day-block';
+
+                    const header = document.createElement('div');
+                    header.className = 'ms-day-header';
+                    header.textContent = day;
+                    block.appendChild(header);
+
+                    byDay[day].forEach(function(gridBtn) {
+                        const isFull     = gridBtn.classList.contains('full');
+                        const isSelected = gridBtn.classList.contains('selected');
+                        const className  = gridBtn.dataset.class;
+                        const time       = gridBtn.dataset.time;
+                        const price      = gridBtn.dataset.price;
+                        const spots      = gridBtn.dataset.spots;
+
+                        const slotDiv = document.createElement('div');
+                        slotDiv.className = 'ms-slot' + (isFull ? ' ms-slot--full' : '');
+
+                        slotDiv.innerHTML =
+                            '<div class="ms-slot-info">' +
+                                '<span class="ms-slot-name">' + className + '</span>' +
+                                '<span class="ms-slot-meta">' + time + (isFull ? ' · Full' : ' · ' + spots + ' spots') + '</span>' +
+                                '<span class="ms-slot-price">MVR ' + price + ' / month</span>' +
+                            '</div>' +
+                            '<button class="ms-slot-btn ' + (isFull ? 'full' : isSelected ? 'selected' : 'available') + '"' +
+                                (isFull ? ' disabled' : '') + '>' +
+                                (isFull ? 'Full' : isSelected ? '✓ Selected' : 'Select') +
+                            '</button>';
+
+                        // Wire up the mobile button to mirror the grid button
+                        const mobileBtn = slotDiv.querySelector('.ms-slot-btn');
+                        if (!isFull) {
+                            mobileBtn.addEventListener('click', function() {
+                                // Trigger the same logic as the grid button
+                                gridBtn.click();
+                                // Sync this button's appearance
+                                const nowSelected = gridBtn.classList.contains('selected');
+                                mobileBtn.className = 'ms-slot-btn ' + (nowSelected ? 'selected' : 'available');
+                                mobileBtn.textContent = nowSelected ? '✓ Selected' : 'Select';
+                            });
+                        }
+
+                        block.appendChild(slotDiv);
+                    });
+
+                    container.appendChild(block);
+                });
+            }
+
+            // Build on load
+            buildMobileSchedule();
+            
             // ── ENROLMENT TABS (Adult / Kids) ──────────────────
             document.querySelectorAll('.enrol-tab').forEach(function(tab) {
                 tab.addEventListener('click', function() {

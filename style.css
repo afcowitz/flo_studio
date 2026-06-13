@@ -1632,6 +1632,11 @@ body {
     display: block;
 }
 
+/* Mobile schedule list — hidden on desktop, shown on mobile via media query */
+.mobile-schedule {
+    display: none;
+}
+
 /* ════════════════════════════════════════════════════════════════
    TIMETABLE
 ════════════════════════════════════════════════════════════════ */
@@ -2599,5 +2604,105 @@ body {
   .quick-action-btn {
     width: 100%;
     text-align: center;
+  }
+
+  /* ── MOBILE SCHEDULE LIST ── */
+  .timetable-wrap {
+    overflow-x: unset;
+  }
+
+  .timetable {
+    display: none;        /* hide the grid on mobile */
+  }
+
+  .mobile-schedule {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .ms-day-block {
+    background: var(--white);
+    border: 1px solid #e8e8e4;
+    overflow: hidden;
+  }
+
+  .ms-day-header {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--white);
+    background: var(--teal);
+    padding: 10px 16px;
+  }
+
+  .ms-slot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px;
+    border-bottom: 1px solid #f0f0ee;
+    gap: 12px;
+  }
+
+  .ms-slot:last-child {
+    border-bottom: none;
+  }
+
+  .ms-slot-info {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    flex: 1;
+  }
+
+  .ms-slot-name {
+    font-size: 15px;
+    color: var(--text-dark);
+    font-family: 'Georgia', serif;
+  }
+
+  .ms-slot-meta {
+    font-size: 12px;
+    color: var(--text-light);
+  }
+
+  .ms-slot-price {
+    font-size: 12px;
+    color: var(--teal);
+  }
+
+  .ms-slot-btn {
+    font-family: 'Georgia', serif;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 8px 14px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .ms-slot-btn.available {
+    background: var(--teal-light);
+    color: var(--teal);
+  }
+
+  .ms-slot-btn.selected {
+    background: var(--teal);
+    color: white;
+  }
+
+  .ms-slot-btn.full {
+    background: #f0f0ee;
+    color: #bbb;
+    cursor: not-allowed;
+  }
+
+  .ms-slot--full .ms-slot-name,
+  .ms-slot--full .ms-slot-meta {
+    opacity: 0.5;
   }
 }
