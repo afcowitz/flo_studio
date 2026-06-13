@@ -1196,10 +1196,13 @@ body {
     grid-template-rows: auto 1fr;
   }
 
+
   /* Sidebar becomes a horizontal scrollable tab bar */
   .portal-sidebar {
-    position: static;               /* no longer sticky on the side */
-    height: auto;
+    position: static;
+    height: auto !important;
+    min-height: unset;
+    width: 100%;
     border-right: none;
     border-bottom: 1px solid #e8e8e4;
     padding: 8px 0;
@@ -1590,7 +1593,7 @@ body {
   cursor: pointer;
   border-radius: 4px;
   transition: all 0.2s;
-  width: 100%;
+
 }
 
 .sidebar-link:hover {
