@@ -1178,3 +1178,1279 @@ body {
   }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+/* ════════════════════════════════════════════════
+   LOGIN BUTTON (navbar)
+════════════════════════════════════════════════ */
+.btn-login {
+  font-family: 'Georgia', serif;
+  font-size: 13px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 10px 24px;
+  background-color: var(--tangerine);
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-login:hover {
+  background-color: var(--teal);
+}
+
+/* ════════════════════════════════════════════════
+   LOGIN MODAL
+════════════════════════════════════════════════ */
+.modal-overlay {
+  display: none;                  /* invisible by default */
+  position: fixed;                /* stays on screen even if you scroll */
+  inset: 0;                       /* shorthand for top/right/bottom/left: 0 */
+  background: rgba(0, 0, 0, 0.5);/* dark semi-transparent backdrop */
+  z-index: 1000;                  /* sits on top of everything */
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-overlay.modal-open {
+  display: flex;                  /* flex centers the modal-box inside */
+}
+
+.modal-box {
+  background: var(--white);
+  padding: 48px;
+  width: 100%;
+  max-width: 420px;
+  position: relative;
+  text-align: center;
+}
+
+.modal-close {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  color: var(--text-light);
+}
+
+.modal-logo {
+  font-size: 20px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--teal);
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+.modal-tagline {
+  color: var(--text-light);
+  font-size: 14px;
+  margin-bottom: 28px;
+}
+
+.login-role-tabs {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.role-tab {
+  font-family: 'Georgia', serif;
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 8px 20px;
+  border: 1px solid #ddd;
+  background: none;
+  cursor: pointer;
+  color: var(--text-mid);
+  transition: all 0.2s;
+}
+
+.role-tab.active {
+  background: var(--teal);
+  color: white;
+  border-color: var(--teal);
+}
+
+.login-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.login-fields input {
+  font-family: 'Georgia', serif;
+  font-size: 14px;
+  padding: 12px 16px;
+  border: 1px solid #ddd;
+  background: var(--white);
+  color: var(--text-dark);
+  outline: none;
+  width: 100%;
+}
+
+.login-fields input:focus {
+  border-color: var(--teal);
+}
+
+.btn-login-submit {
+  font-family: 'Georgia', serif;
+  font-size: 13px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 14px;
+  background: var(--teal);
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+  width: 100%;
+}
+
+.btn-login-submit:hover {
+  background: var(--teal-dark);
+}
+
+.login-hint {
+  margin-top: 16px;
+  font-size: 13px;
+  color: var(--tangerine);
+  min-height: 20px;
+}
+
+/* ════════════════════════════════════════════════
+   PORTAL WRAPPER (all portals, hidden by default)
+════════════════════════════════════════════════ */
+.portal {
+  display: none;
+}
+
+.portal.portal-active {
+  display: block;
+}
+
+
+
+
+
+
+
+
+
+
+/* ════════════════════════════════════════════════════════════════
+   CLIENT PORTAL — LAYOUT
+════════════════════════════════════════════════════════════════ */
+
+.portal-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  border-bottom: 1px solid #e8e8e4;
+  background-color: var(--white);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.portal-nav-logo {
+  font-size: 20px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--teal);
+  font-weight: bold;
+}
+
+.portal-nav-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.portal-nav-user {
+  font-size: 13px;
+  color: var(--text-mid);
+  letter-spacing: 0.5px;
+}
+
+.btn-logout {
+  font-family: 'Georgia', serif;
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 8px 18px;
+  background: none;
+  border: 1px solid #ddd;
+  cursor: pointer;
+  color: var(--text-mid);
+  transition: all 0.2s;
+}
+
+.btn-logout:hover {
+    background: var(--tangerine) !important;
+    color: white !important;
+    border-color: var(--tangerine);
+}
+
+.portal-body {
+  display: grid;
+  grid-template-columns: 220px 1fr;   /* sidebar is fixed 220px, main takes the rest */
+  min-height: calc(100vh - 65px);     /* fill the screen below the nav */
+}
+
+/* ── SIDEBAR ── */
+.portal-sidebar {
+  border-right: 1px solid #e8e8e4;
+  padding: 32px 0;
+  background-color: var(--white);
+  position: sticky;
+  top: 65px;                          /* sticks below the portal nav */
+  height: calc(100vh - 65px);
+  overflow-y: auto;
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 0 16px;
+}
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  background: none;
+  border: none;
+  text-align: left;
+  font-family: 'Georgia', serif;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  color: var(--text-mid);
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.2s;
+  width: 100%;
+}
+
+.sidebar-link:hover {
+  background-color: var(--teal-light);
+  color: var(--teal);
+}
+
+.sidebar-link.active {
+  background-color: var(--teal-light);
+  color: var(--teal);
+  font-weight: bold;
+}
+
+.sidebar-icon {
+  font-size: 16px;
+  width: 20px;
+  text-align: center;
+}
+
+/* ── MAIN CONTENT ── */
+.portal-main {
+  padding: 48px;
+  background-color: #f5f5f2;
+  overflow-y: auto;
+}
+
+.portal-view {
+  display: none;
+}
+
+.portal-view.active {
+  display: block;
+}
+
+.portal-view-header {
+  margin-bottom: 36px;
+}
+
+.portal-view-header h2 {
+  font-size: 28px;
+  color: var(--text-dark);
+  margin-bottom: 6px;
+}
+
+.portal-view-sub {
+  font-size: 14px;
+  color: var(--text-light);
+}
+
+.portal-section {
+  margin-bottom: 48px;
+}
+
+.portal-section-title {
+  font-size: 13px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-light);
+  margin-bottom: 20px;
+}
+
+/* ── STAT CARDS ── */
+.portal-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 40px;
+}
+
+.stat-card {
+  background: var(--white);
+  padding: 24px;
+  border: 1px solid #e8e8e4;
+}
+
+.stat-card--highlight {
+  border-left: 3px solid var(--tangerine);
+}
+
+.stat-label {
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-light);
+  margin-bottom: 8px;
+}
+
+.stat-value {
+  font-size: 22px;
+  color: var(--teal);
+  margin-bottom: 6px;
+}
+
+.stat-detail {
+  font-size: 12px;
+  color: var(--text-light);
+}
+
+/* ── BOOKING LIST ── */
+.booking-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.booking-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--white);
+  padding: 18px 24px;
+  border: 1px solid #e8e8e4;
+}
+
+.booking-item--past {
+  opacity: 0.6;
+}
+
+.booking-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.booking-dot--teal     { background-color: var(--teal); }
+.booking-dot--tangerine { background-color: var(--tangerine); }
+.booking-dot--muted    { background-color: #ccc; }
+
+.booking-info {
+  flex: 1;
+}
+
+.booking-name {
+  font-size: 15px;
+  color: var(--text-dark);
+  margin-bottom: 3px;
+}
+
+.booking-meta {
+  font-size: 12px;
+  color: var(--text-light);
+}
+
+.booking-status {
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 4px 10px;
+}
+
+.status--confirmed { background: var(--teal-light);      color: var(--teal); }
+.status--waitlist  { background: var(--tangerine-light);  color: var(--tangerine); }
+.status--attended  { background: #f0f0ee;                 color: var(--text-light); }
+
+.btn-cancel {
+  font-family: 'Georgia', serif;
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  background: none;
+  border: 1px solid #ddd;
+  color: var(--text-light);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-cancel:hover {
+  border-color: var(--tangerine);
+  color: var(--tangerine);
+}
+
+/* ── QUICK ACTIONS ── */
+.quick-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.quick-action-btn {
+  font-family: 'Georgia', serif;
+  font-size: 13px;
+  letter-spacing: 1px;
+  padding: 12px 24px;
+  background: var(--white);
+  border: 1px solid var(--teal);
+  color: var(--teal);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.quick-action-btn:hover {
+  background: var(--teal);
+  color: white;
+}
+
+/* ── SCHEDULE GRID ── */
+.schedule-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.schedule-item {
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  gap: 16px;
+  align-items: start;
+  padding: 20px 0;
+  border-bottom: 1px solid #e8e8e4;
+}
+
+.schedule-day {
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-light);
+  padding-top: 14px;
+}
+
+.schedule-classes {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.schedule-class {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 20px;
+  border: 1px solid #e8e8e4;
+  background: var(--white);
+}
+
+.sc--booked    { border-left: 3px solid var(--teal); }
+.sc--full      { border-left: 3px solid var(--tangerine); opacity: 0.75; }
+.sc--available { border-left: 3px solid #e8e8e4; }
+
+.sc-name {
+  font-size: 14px;
+  font-weight: bold;
+  color: var(--text-dark);
+  min-width: 80px;
+}
+
+.sc-meta {
+  font-size: 12px;
+  color: var(--text-light);
+  flex: 1;
+}
+
+.sc-booked-label {
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--teal);
+}
+
+.sc-waitlisted {
+  color: var(--tangerine);
+}
+
+.btn-book {
+  font-family: 'Georgia', serif;
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 6px 16px;
+  background: var(--teal);
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-book:hover { background: var(--teal-dark); }
+
+.btn-waitlist {
+  font-family: 'Georgia', serif;
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 6px 16px;
+  background: none;
+  color: var(--tangerine);
+  border: 1px solid var(--tangerine);
+  cursor: pointer;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   ENROLMENT — TABS
+════════════════════════════════════════════════════════════════ */
+.enrol-tabs {
+    display: flex;
+    gap: 0;
+    margin-bottom: 32px;
+    border-bottom: 2px solid #e8e8e4;
+}
+
+.enrol-tab {
+    font-family: 'Georgia', serif;
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 12px 28px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-light);
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+    transition: all 0.2s;
+}
+
+.enrol-tab.active {
+    color: var(--teal);
+    border-bottom-color: var(--teal);
+}
+
+.enrol-panel {
+    display: none;
+}
+
+.enrol-panel.active {
+    display: block;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   TIMETABLE
+════════════════════════════════════════════════════════════════ */
+
+/* The schedule view needs a different layout when the
+   enrol sidebar is present — main content + sidebar side by side */
+#view-schedule {
+    display: none;                  /* overrides .portal-view default */
+    grid-template-columns: 1fr 280px;
+    grid-template-rows: auto auto 1fr;
+    gap: 0 32px;
+}
+
+#view-schedule.active {
+    display: grid;
+}
+
+/* Header and tabs span full width */
+#view-schedule .portal-view-header,
+#view-schedule .enrol-tabs {
+    grid-column: 1 / -1;
+}
+
+/* Sidebar sticks to the right, spans all rows below header/tabs */
+.enrol-sidebar {
+    grid-column: 2;
+    grid-row: 3;
+}
+
+/* Adult/kids panels go in the left column */
+.enrol-panel {
+    grid-column: 1;
+}
+
+.timetable-wrap {
+    overflow-x: auto;              /* scroll on narrow screens */
+}
+
+.timetable {
+    display: grid;
+    grid-template-columns: 80px repeat(6, 1fr);   /* time col + 6 day cols */
+    gap: 4px;
+    min-width: 600px;
+}
+
+.tt-cell {
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tt-corner {
+    background: transparent;
+}
+
+.tt-head {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-light);
+    background: #f5f5f2;
+    border-radius: 4px;
+    padding: 8px 4px;
+}
+
+.tt-time {
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: var(--text-light);
+    justify-content: flex-start;
+    padding-left: 4px;
+}
+
+.tt-empty {
+    color: #ddd;
+    font-size: 14px;
+}
+
+/* ── SLOT BUTTONS ── */
+.tt-slot {
+    width: 100%;
+    min-height: 64px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+    padding: 8px 4px;
+    font-family: 'Georgia', serif;
+}
+
+.tt-slot-name {
+    font-size: 13px;
+    font-weight: bold;
+    display: block;
+}
+
+.tt-slot-meta {
+    font-size: 10px;
+    letter-spacing: 0.5px;
+    display: block;
+}
+
+/* Available state */
+.tt-slot.available {
+    background: var(--teal-light);
+    color: var(--teal);
+    border: 1px solid #c8e8e4;
+}
+
+.tt-slot.available:hover {
+    background: var(--teal);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(42,157,143,0.2);
+}
+
+/* Selected state */
+.tt-slot.selected {
+    background: var(--teal);
+    color: white;
+    border: 1px solid var(--teal-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(42,157,143,0.25);
+}
+
+.tt-slot.selected .tt-slot-meta::before {
+    content: '✓ ';
+}
+
+/* Full state */
+.tt-slot.full {
+    background: #f0f0ee;
+    color: #bbb;
+    border: 1px solid #e8e8e4;
+    cursor: not-allowed;
+}
+
+/* Legend */
+.tt-legend {
+    display: flex;
+    gap: 24px;
+    margin-top: 20px;
+    padding-top: 16px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--text-light);
+}
+
+.legend-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+}
+
+.ld-available { background: var(--teal-light); border: 1px solid #c8e8e4; }
+.ld-selected  { background: var(--teal); }
+.ld-full      { background: #f0f0ee; border: 1px solid #e8e8e4; }
+
+/* ════════════════════════════════════════════════════════════════
+   ENROLMENT SIDEBAR (running total)
+════════════════════════════════════════════════════════════════ */
+.enrol-sidebar-inner {
+    background: var(--white);
+    border: 1px solid #e8e8e4;
+    padding: 24px;
+    position: sticky;
+    top: 80px;                 /* sticks below the portal nav */
+}
+
+.enrol-sidebar-title {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-light);
+    margin-bottom: 4px;
+}
+
+.enrol-sidebar-month {
+    font-size: 18px;
+    color: var(--text-dark);
+    margin-bottom: 20px;
+}
+
+.enrol-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-height: 80px;
+    margin-bottom: 20px;
+}
+
+.enrol-empty {
+    font-size: 13px;
+    color: var(--text-light);
+    font-style: italic;
+}
+
+.enrol-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 8px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #f0f0ee;
+}
+
+.enrol-item-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1;
+}
+
+.enrol-item-name {
+    font-size: 13px;
+    color: var(--text-dark);
+}
+
+.enrol-item-day {
+    font-size: 11px;
+    color: var(--text-light);
+}
+
+.enrol-item-price {
+    font-size: 13px;
+    color: var(--teal);
+    white-space: nowrap;
+}
+
+.enrol-total-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 0;
+    border-top: 2px solid var(--teal-light);
+    margin-bottom: 20px;
+}
+
+.enrol-total-row span:first-child {
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text-light);
+}
+
+.enrol-total {
+    font-size: 20px;
+    color: var(--teal);
+    font-weight: bold;
+}
+
+.btn-enrol {
+    width: 100%;
+    font-family: 'Georgia', serif;
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 14px;
+    background: var(--tangerine);
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-bottom: 12px;
+}
+
+.btn-enrol:hover:not(:disabled) {
+    background: var(--teal);
+}
+
+.btn-enrol:disabled {
+    background: #ddd;
+    color: #aaa;
+    cursor: not-allowed;
+}
+
+.enrol-note {
+    font-size: 11px;
+    color: var(--text-light);
+    text-align: center;
+    line-height: 1.5;
+}
+
+/* ── MEMBERSHIP ── */
+.membership-card {
+  background: var(--white);
+  border: 1px solid #e8e8e4;
+  padding: 32px;
+  max-width: 560px;
+}
+
+.membership-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 28px;
+}
+
+.membership-plan-label {
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-light);
+  margin-bottom: 6px;
+}
+
+.membership-plan-name {
+  font-size: 22px;
+  color: var(--text-dark);
+}
+
+.membership-badge {
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  background: var(--teal-light);
+  color: var(--teal);
+}
+
+.membership-details {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.membership-detail-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  color: var(--text-mid);
+  padding-bottom: 14px;
+  border-bottom: 1px solid #f0f0ee;
+}
+
+/* ── SETTINGS ── */
+.settings-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 480px;
+}
+
+.settings-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.settings-field label {
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-light);
+}
+
+.settings-field input {
+  font-family: 'Georgia', serif;
+  font-size: 14px;
+  padding: 12px 16px;
+  border: 1px solid #ddd;
+  background: var(--white);
+  color: var(--text-dark);
+  outline: none;
+}
+
+.settings-field input:focus {
+  border-color: var(--teal);
+}
+
+.btn-save {
+  font-family: 'Georgia', serif;
+  font-size: 13px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 14px 32px;
+  background: var(--teal);
+  color: white;
+  border: none;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: background 0.2s;
+}
+
+.btn-save:hover { background: var(--teal-dark); }
+
+/* ── NOTIFICATION TOGGLES ── */
+.settings-toggles {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  max-width: 520px;
+}
+
+.toggle-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+  border-bottom: 1px solid #e8e8e4;
+}
+
+.toggle-label {
+  font-size: 14px;
+  color: var(--text-dark);
+  margin-bottom: 3px;
+}
+
+.toggle-sub {
+  font-size: 12px;
+  color: var(--text-light);
+}
+
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-slider {
+  position: absolute;
+  inset: 0;
+  background-color: #ddd;
+  border-radius: 24px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.toggle-slider:before {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  left: 3px;
+  bottom: 3px;
+  background: white;
+  border-radius: 50%;
+  transition: 0.3s;
+}
+
+.toggle-switch input:checked + .toggle-slider {
+  background-color: var(--teal);
+}
+
+.toggle-switch input:checked + .toggle-slider:before {
+  transform: translateX(20px);
+}
+
+
+/* ════════════════════════════════════════════════════════════════
+   DASHBOARD — Next Class card emphasis
+════════════════════════════════════════════════════════════════ */
+.stat-card--next-class {
+    border-left: 3px solid var(--teal);
+}
+
+.stat-value-small {
+    font-size: 14px;
+    color: var(--text-light);
+}
+
+.stat-next-when {
+    font-size: 18px;
+    color: var(--text-dark);
+    margin-bottom: 4px;
+    letter-spacing: 0.5px;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   ENROLMENT STATUS BANNER
+   Used in Schedule (open) and Membership (upcoming)
+════════════════════════════════════════════════════════════════ */
+.enrol-status-banner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 24px;
+    margin-bottom: 28px;
+    border-radius: 2px;
+}
+
+.enrol-status--open {
+    background: var(--teal-light);
+    border-left: 3px solid var(--teal);
+}
+
+.enrol-status--upcoming {
+    background: #fdf6f0;
+    border-left: 3px solid var(--tangerine);
+}
+
+.enrol-status-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.enrol-status-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.enrol-status--open .enrol-status-dot     { background: var(--teal); }
+.enrol-status--upcoming .enrol-status-dot { background: var(--tangerine); }
+
+.enrol-status-title {
+    font-size: 14px;
+    color: var(--text-dark);
+    margin-bottom: 2px;
+}
+
+.enrol-status-sub {
+    font-size: 12px;
+    color: var(--text-light);
+}
+
+/* ════════════════════════════════════════════════════════════════
+   MEMBERSHIP — Enrolment breakdown
+════════════════════════════════════════════════════════════════ */
+.enrol-breakdown-name {
+    font-size: 14px;
+    color: var(--text-dark);
+}
+
+.enrol-breakdown-days {
+    font-size: 12px;
+    color: var(--text-light);
+}
+
+.membership-total-row {
+    border-top: 2px solid var(--teal-light) !important;
+    padding-top: 16px !important;
+    margin-top: 4px;
+}
+
+.membership-total-value {
+    font-size: 18px;
+    color: var(--teal);
+    font-weight: bold;
+}
+
+/* ── ATTENDANCE PROGRESS BAR ── */
+.membership-progress-wrap {
+    margin-top: 28px;
+    padding-top: 24px;
+    border-top: 1px solid #f0f0ee;
+}
+
+.membership-progress-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: var(--text-mid);
+    margin-bottom: 10px;
+}
+
+.membership-progress-bar {
+    height: 6px;
+    background: #f0f0ee;
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 8px;
+}
+
+.membership-progress-fill {
+    height: 100%;
+    background: var(--teal);
+    border-radius: 3px;
+    transition: width 0.6s ease;
+}
+
+.membership-progress-sub {
+    font-size: 12px;
+    color: var(--text-light);
+}
+
+/* ════════════════════════════════════════════════════════════════
+   PAYMENT CONFIRMATION MODAL
+════════════════════════════════════════════════════════════════ */
+.payment-modal-summary {
+    background: var(--teal-light);
+    border-left: 3px solid var(--teal);
+    padding: 16px 20px;
+    margin: 20px 0;
+    text-align: left;
+}
+
+.payment-summary-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: var(--text-mid);
+    padding: 5px 0;
+}
+
+.payment-summary-total {
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+    color: var(--teal);
+    padding-top: 10px;
+    margin-top: 6px;
+    border-top: 1px solid #c8e8e4;
+}
+
+.payment-modal-instruction {
+    font-size: 14px;
+    color: var(--text-mid);
+    line-height: 1.6;
+    margin-bottom: 24px;
+}
+
+.btn-payment {
+    display: block;
+    font-family: 'Georgia', serif;
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 16px;
+    background: var(--tangerine);
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-bottom: 14px;
+}
+
+.btn-payment:hover {
+    background: var(--teal);
+}
+
+.payment-modal-note {
+    font-size: 11px;
+    color: var(--text-light);
+    text-align: center;
+    line-height: 1.5;
+}
+
+.login-demo-creds {
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid #e8e8e4;
+    font-size: 12px;
+    color: var(--text-light);
+    line-height: 2;
+}
+
+.demo-creds-title {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    color: #bbb;
+}
