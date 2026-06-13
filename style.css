@@ -1244,6 +1244,24 @@ body {
   letter-spacing: 0.5px;
 }
 
+.btn-nav-settings {
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    color: var(--text-mid);
+    padding: 4px 8px;
+    transition: color 0.2s;
+    line-height: 1;
+}
+
+.btn-nav-settings:hover {
+    color: var(--teal);
+}
+
+.btn-nav-settings.active {
+    color: var(--teal);
+}
 .btn-logout {
   font-family: 'Georgia', serif;
   font-size: 12px;

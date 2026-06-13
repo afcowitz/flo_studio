@@ -807,6 +807,7 @@
                 <div class="portal-nav-logo">FLO Studio</div>
                 <div class="portal-nav-right">
                     <span class="portal-nav-user">Sara Rasheed</span>
+                    <button class="btn-nav-settings" id="navSettingsBtn" title="Settings">⚙</button>
                     <button class="btn btn-logout" id="clientLogout">Logout</button>
                 </div>
             </nav>
@@ -828,9 +829,6 @@
                         </button>
                         <button class="sidebar-link" data-view="membership">
                             <span class="sidebar-icon">◇</span> Membership
-                        </button>
-                        <button class="sidebar-link" data-view="settings">
-                            <span class="sidebar-icon">⊙</span> Settings
                         </button>
                     </nav>
                 </aside>
@@ -972,7 +970,7 @@
                                 <div class="booking-item booking-item--past">
                                     <div class="booking-dot booking-dot--muted"></div>
                                     <div class="booking-info">
-                                        <p class="booking-name">Ground</p>
+                                        <p class="booking-name">Reset</p>
                                         <p class="booking-meta">Sat 11 Jan · 8:00 AM · with Lara</p>
                                     </div>
                                     <span class="booking-status status--attended">Attended</span>
@@ -1118,18 +1116,18 @@
                                     <div class="tt-cell tt-empty">—</div>
                                     <div class="tt-cell">
                                         <button class="tt-slot available"
-                                            data-class="Ground" data-day="Mon" data-time="8:00 PM"
+                                            data-class="Reset" data-day="Mon" data-time="8:00 PM"
                                             data-price="400" data-spots="7">
-                                            <span class="tt-slot-name">Ground</span>
+                                            <span class="tt-slot-name">Reset</span>
                                             <span class="tt-slot-meta">7 spots</span>
                                         </button>
                                     </div>
                                     <div class="tt-cell tt-empty">—</div>
                                     <div class="tt-cell">
                                         <button class="tt-slot available"
-                                            data-class="Ground" data-day="Wed" data-time="8:00 PM"
+                                            data-class="Reset" data-day="Wed" data-time="8:00 PM"
                                             data-price="400" data-spots="2">
-                                            <span class="tt-slot-name">Ground</span>
+                                            <span class="tt-slot-name">Reset</span>
                                             <span class="tt-slot-meta">2 spots</span>
                                         </button>
                                     </div>
@@ -1650,7 +1648,7 @@
 
             // Build on load
             buildMobileSchedule();
-            
+
             // ── ENROLMENT TABS (Adult / Kids) ──────────────────
             document.querySelectorAll('.enrol-tab').forEach(function(tab) {
                 tab.addEventListener('click', function() {
@@ -1675,6 +1673,18 @@
             });
             });
 
+            // ── SETTINGS BUTTON IN NAV ──────────────────────
+            document.getElementById('navSettingsBtn').addEventListener('click', function() {
+                // Switch to settings view
+                document.querySelectorAll('.sidebar-link').forEach(l => l.classList.remove('active'));
+                document.querySelectorAll('.portal-view').forEach(v => v.classList.remove('active'));
+                document.getElementById('view-settings').classList.add('active');
+
+                // Highlight the gear icon
+                document.querySelectorAll('.btn-nav-settings').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+            
             // ── CLIENT LOGOUT ───────────────────────────────
             document.getElementById('clientLogout').addEventListener('click', function() {
             location.reload();
