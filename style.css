@@ -1031,298 +1031,7 @@ body {
    MOBILE RESPONSIVE STYLES
    ════════════════════════════════ */
 
-@media (max-width: 768px) {
 
-  /* ── NAVBAR ── */
-  .navbar {
-    padding: 20px 24px;
-    flex-wrap: wrap;
-    gap: 16px;
-  }
-
-  .nav-links {
-    gap: 20px;
-    flex-wrap: wrap;
-  }
-
-  .nav-links a {
-    font-size: 12px;
-  }
-
-  /* ── EVENT BANNER ── */
-  .event-banner {
-    padding: 12px 24px;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
-  }
-
-  /* ── HERO ── */
-  .hero {
-    padding: 60px 24px;
-    min-height: 70vh;
-  }
-
-  .hero-title {
-    font-size: 38px;
-  }
-
-  .hero-sub {
-    font-size: 16px;
-  }
-
-  /* ── SECTION SHARED ── */
-  .section-title {
-    font-size: 30px;
-  }
-
-  .classes,
-  .about,
-  .instructors,
-  .workshops {
-    padding: 60px 24px;
-  }
-
-  /* ── CLASSES GRID ── */
-  .classes-grid {
-    grid-template-columns: 1fr;
-  }
-
-  /* ── CLASS CARDS — always show info on mobile ── */
-  .card-content {
-    padding-top: 24px;
-  }
-
-  .card-lottie-wrap {
-    position: relative;
-    margin-bottom: 16px;
-  }
-
-  .class-card:hover .card-content {
-    transform: none;
-  }
-
-  .card-hover-info {
-    opacity: 1;
-    transform: none;
-  }
-
-  .class-card:hover .card-lottie-wrap {
-    transform: none;
-  }
-
-  /* ── FLO KIDS ── */
-  .kids-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .kids-card {
-    flex-direction: column;
-  }
-
-  /* ── ABOUT ── */
-  .about-grid {
-    grid-template-columns: 1fr;
-    gap: 40px;
-  }
-
-  .about-stats {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  /* ── INSTRUCTORS ── */
-  .instructors-grid {
-    grid-template-columns: 1fr;
-  }
-
-  /* ── WORKSHOPS ── */
-  .workshop-item {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-
-  .workshop-left {
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-  }
-
-  .workshop-right {
-    align-items: flex-start;
-  }
-
-  .workshop-item:hover {
-    margin: 0;
-    padding: 36px 0;
-  }
-
-  /* ── FOOTER ── */
-  .footer {
-    padding: 60px 24px 0;
-  }
-
-  .footer-top {
-    grid-template-columns: 1fr;
-    gap: 40px;
-  }
-
-  .footer-bottom {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
-  }
-
-  .footer-bottom-links {
-    flex-wrap: wrap;
-    gap: 16px;
-  }
-
-  /* ════════════════════════════════════════════════
-     PORTAL — MOBILE
-  ════════════════════════════════════════════════ */
-
-  /* Portal nav */
-  .portal-nav {
-    padding: 16px 20px;
-  }
-
-  .portal-nav-user {
-    display: none;        /* hide the name, too cramped */
-  }
-
-  /* Stack sidebar above main instead of side by side */
-  .portal-body {
-    grid-template-columns: 1fr;     /* single column */
-    grid-template-rows: auto 1fr;
-  }
-
-
-  /* Sidebar becomes a horizontal scrollable tab bar */
-  .portal-sidebar {
-    position: static;
-    height: auto !important;
-    min-height: unset;
-    width: 100%;
-    border-right: none;
-    border-bottom: 1px solid #e8e8e4;
-    padding: 8px 0;
-    overflow-x: auto;
-    overflow-y: hidden;
-  }
-
-  .sidebar-nav {
-    flex-direction: row;            /* horizontal instead of vertical */
-    gap: 0;
-    padding: 0 12px;
-    white-space: nowrap;            /* stop buttons wrapping */
-  }
-
-  .sidebar-link {
-    flex-shrink: 0;                 /* don't squish buttons */
-    padding: 10px 16px;
-    border-radius: 0;
-    border-bottom: 2px solid transparent;
-    font-size: 12px;
-  }
-
-  .sidebar-link.active {
-    background: none;
-    border-bottom-color: var(--teal);
-    color: var(--teal);
-  }
-
-  .sidebar-link:hover {
-    background: none;
-  }
-
-  .sidebar-icon {
-    display: none;                  /* icons take too much space on mobile */
-  }
-
-  /* Main content full width */
-  .portal-main {
-    padding: 24px 16px;
-  }
-
-  /* Stat cards — 2 columns on mobile instead of 4 */
-  .portal-stats {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  /* Schedule view — stack timetable and sidebar vertically */
-  #view-schedule {
-    grid-template-columns: 1fr;
-  }
-
-  #view-schedule .portal-view-header,
-  #view-schedule .enrol-tabs {
-    grid-column: 1;
-  }
-
-  .enrol-sidebar {
-    grid-column: 1;
-    grid-row: auto;
-    margin-top: 32px;
-  }
-
-  .enrol-sidebar-inner {
-    position: static;               /* don't sticky on mobile */
-  }
-
-  /* Timetable — allow horizontal scroll, shrink cells */
-  .timetable-wrap {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .timetable {
-    min-width: 520px;               /* forces scroll rather than squishing */
-  }
-
-  .tt-slot {
-    min-height: 52px;
-    padding: 6px 2px;
-  }
-
-  .tt-slot-name {
-    font-size: 11px;
-  }
-
-  .tt-slot-meta {
-    font-size: 9px;
-  }
-
-  /* Booking items stack better */
-  .booking-item {
-    flex-wrap: wrap;
-    gap: 10px;
-    padding: 14px 16px;
-  }
-
-  /* Membership card full width */
-  .membership-card {
-    max-width: 100%;
-  }
-
-  /* Settings form full width */
-  .settings-form {
-    max-width: 100%;
-  }
-
-  .settings-toggles {
-    max-width: 100%;
-  }
-
-  /* Quick actions wrap */
-  .quick-actions {
-    flex-direction: column;
-  }
-
-  .quick-action-btn {
-    width: 100%;
-    text-align: center;
-  }
-}
 
 
 
@@ -2598,4 +2307,297 @@ body {
     text-transform: uppercase;
     margin-bottom: 6px;
     color: #bbb;
+}
+
+@media (max-width: 768px) {
+
+  /* ── NAVBAR ── */
+  .navbar {
+    padding: 20px 24px;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .nav-links {
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .nav-links a {
+    font-size: 12px;
+  }
+
+  /* ── EVENT BANNER ── */
+  .event-banner {
+    padding: 12px 24px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 60px 24px;
+    min-height: 70vh;
+  }
+
+  .hero-title {
+    font-size: 38px;
+  }
+
+  .hero-sub {
+    font-size: 16px;
+  }
+
+  /* ── SECTION SHARED ── */
+  .section-title {
+    font-size: 30px;
+  }
+
+  .classes,
+  .about,
+  .instructors,
+  .workshops {
+    padding: 60px 24px;
+  }
+
+  /* ── CLASSES GRID ── */
+  .classes-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* ── CLASS CARDS — always show info on mobile ── */
+  .card-content {
+    padding-top: 24px;
+  }
+
+  .card-lottie-wrap {
+    position: relative;
+    margin-bottom: 16px;
+  }
+
+  .class-card:hover .card-content {
+    transform: none;
+  }
+
+  .card-hover-info {
+    opacity: 1;
+    transform: none;
+  }
+
+  .class-card:hover .card-lottie-wrap {
+    transform: none;
+  }
+
+  /* ── FLO KIDS ── */
+  .kids-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .kids-card {
+    flex-direction: column;
+  }
+
+  /* ── ABOUT ── */
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .about-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* ── INSTRUCTORS ── */
+  .instructors-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* ── WORKSHOPS ── */
+  .workshop-item {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .workshop-left {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .workshop-right {
+    align-items: flex-start;
+  }
+
+  .workshop-item:hover {
+    margin: 0;
+    padding: 36px 0;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    padding: 60px 24px 0;
+  }
+
+  .footer-top {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .footer-bottom-links {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  /* ════════════════════════════════════════════════
+     PORTAL — MOBILE
+  ════════════════════════════════════════════════ */
+
+  /* Portal nav */
+  .portal-nav {
+    padding: 16px 20px;
+  }
+
+  .portal-nav-user {
+    display: none;        /* hide the name, too cramped */
+  }
+
+  /* Stack sidebar above main instead of side by side */
+  .portal-body {
+    grid-template-columns: 1fr;     /* single column */
+    grid-template-rows: auto 1fr;
+  }
+
+
+  /* Sidebar becomes a horizontal scrollable tab bar */
+  .portal-sidebar {
+    position: static;
+    height: auto !important;
+    min-height: unset;
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #e8e8e4;
+    padding: 8px 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+
+  .sidebar-nav {
+    flex-direction: row;            /* horizontal instead of vertical */
+    gap: 0;
+    padding: 0 12px;
+    white-space: nowrap;            /* stop buttons wrapping */
+  }
+
+  .sidebar-link {
+    flex-shrink: 0;                 /* don't squish buttons */
+    padding: 10px 16px;
+    border-radius: 0;
+    border-bottom: 2px solid transparent;
+    font-size: 12px;
+  }
+
+  .sidebar-link.active {
+    background: none;
+    border-bottom-color: var(--teal);
+    color: var(--teal);
+  }
+
+  .sidebar-link:hover {
+    background: none;
+  }
+
+  .sidebar-icon {
+    display: none;                  /* icons take too much space on mobile */
+  }
+
+  /* Main content full width */
+  .portal-main {
+    padding: 24px 16px;
+  }
+
+  /* Stat cards — 2 columns on mobile instead of 4 */
+  .portal-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Schedule view — stack timetable and sidebar vertically */
+  #view-schedule {
+    grid-template-columns: 1fr;
+  }
+
+  #view-schedule .portal-view-header,
+  #view-schedule .enrol-tabs {
+    grid-column: 1;
+  }
+
+  .enrol-sidebar {
+    grid-column: 1;
+    grid-row: auto;
+    margin-top: 32px;
+  }
+
+  .enrol-sidebar-inner {
+    position: static;               /* don't sticky on mobile */
+  }
+
+  /* Timetable — allow horizontal scroll, shrink cells */
+  .timetable-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .timetable {
+    min-width: 520px;               /* forces scroll rather than squishing */
+  }
+
+  .tt-slot {
+    min-height: 52px;
+    padding: 6px 2px;
+  }
+
+  .tt-slot-name {
+    font-size: 11px;
+  }
+
+  .tt-slot-meta {
+    font-size: 9px;
+  }
+
+  /* Booking items stack better */
+  .booking-item {
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 14px 16px;
+  }
+
+  /* Membership card full width */
+  .membership-card {
+    max-width: 100%;
+  }
+
+  /* Settings form full width */
+  .settings-form {
+    max-width: 100%;
+  }
+
+  .settings-toggles {
+    max-width: 100%;
+  }
+
+  /* Quick actions wrap */
+  .quick-actions {
+    flex-direction: column;
+  }
+
+  .quick-action-btn {
+    width: 100%;
+    text-align: center;
+  }
 }
