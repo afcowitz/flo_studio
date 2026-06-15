@@ -51,6 +51,65 @@
                 </div>
             </div>
         </div>
+
+        <!-- ═══════════════════════════════════════════
+             ADD CHILD MODAL
+        ════════════════════════════════════════════ -->
+        <div class="modal-overlay" id="addChildModal">
+            <div class="modal-box modal-box--wide">
+                <button class="modal-close" id="addChildModalClose">✕</button>
+                <div class="modal-logo">Add a Child</div>
+                <p class="modal-tagline">Your child's enrolment will be reviewed by the studio.</p>
+
+                <!-- AVATAR PICKER -->
+                <div class="avatar-picker-wrap">
+                    <p class="avatar-picker-label">Choose an avatar</p>
+                    <div class="avatar-picker" id="avatarPicker">
+                        <button class="avatar-option selected" data-avatar="🌸" style="background:#e8f4f1;">🌸</button>
+                        <button class="avatar-option" data-avatar="⭐" style="background:#fdf8e1;">⭐</button>
+                        <button class="avatar-option" data-avatar="🦋" style="background:#f0edf8;">🦋</button>
+                        <button class="avatar-option" data-avatar="🌙" style="background:#edf1f8;">🌙</button>
+                        <button class="avatar-option" data-avatar="🌺" style="background:#fdeef0;">🌺</button>
+                        <button class="avatar-option" data-avatar="🤍" style="background:#f5f5f5;">🤍</button>
+                    </div>
+                </div>
+
+                <!-- CHILD FORM -->
+                <div class="child-form">
+                    <div class="settings-field">
+                        <label>Full Name</label>
+                        <input type="text" id="childName" placeholder="Child's full name" />
+                    </div>
+                    <div class="settings-field">
+                        <label>Date of Birth</label>
+                        <input type="date" id="childDob" />
+                    </div>
+                    <div class="child-form-row">
+                        <div class="settings-field">
+                            <label>Gender</label>
+                            <select id="childGender" class="settings-select">
+                                <option value="">Select</option>
+                                <option value="Female">Female</option>
+                                <option value="Male">Male</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="settings-field">
+                        <label>Contact Number</label>
+                        <input type="text" id="childContact" value="+960 777 0000" />
+                    </div>
+                    <div class="settings-field">
+                        <label>Address</label>
+                        <input type="text" id="childAddress" placeholder="Home address" />
+                    </div>
+                </div>
+
+                <p class="child-form-note" id="childFormNote"></p>
+                <button class="btn-login-submit" id="btnSubmitChild">Submit for Approval →</button>
+            </div>
+        </div>
+        <!-- END ADD CHILD MODAL ══════════════════════ -->
+
         <!-- ═══════════════════════════════════════════
              PAYMENT CONFIRMATION MODAL
              Shown when client clicks "Confirm & Enrol"
@@ -138,7 +197,7 @@
                     </div>
                 </div>
 
-                <div class="class-card">
+                <div class="class-card highlight-card">
                     <div class="card-inner">
                     <div class="card-lottie-wrap">
                         <img src="images/class-icons/pulse.svg" alt="Flow" class="class-icon-img" />
@@ -485,112 +544,239 @@
 
         <div class="instructors-grid">
 
+            <!-- MAANI -->
             <div class="instructor-card">
-            <div class="instructor-img-wrap">
-                <img src="images/profiles/aisha.jpg" alt="Aisha" class="instructor-img" />
-                <div class="instructor-overlay">
-                <p class="instructor-bio">Aisha brings calm authority to every class. With a background in dance and mindful movement, she reads the room and adjusts — always.</p>
+                <div class="instructor-img-wrap">
+                    <img src="images/profiles/aisha.jpg" alt="Maani" class="instructor-img" />
+                    <div class="instructor-overlay">
+                        <p class="instructor-bio">The heart behind FLO. Maani created a space where women can feel safe, strong, inspired, and connected — and she shows up in every class with that same intention.</p>
+                    </div>
                 </div>
-            </div>
-            <div class="instructor-info">
-                <h3>Aisha</h3>
-                <p class="class-type">Vinyasa Flow · Meditation</p>
-                <div class="instructor-tags">
-                <span class="tag">RYT 200</span>
-                <span class="tag">Mindfulness</span>
-                <span class="tag">Breathwork</span>
+                <div class="instructor-info">
+                    <h3>Maani</h3>
+                    <p class="class-type">Founder & Owner</p>
+                    <div class="instructor-tags">
+                        <span class="tag">Flow</span>
+                        <span class="tag">Pulse</span>
+                        <span class="tag">Soar</span>
+                        <span class="tag">Reform</span>
+                        <span class="tag">Transform</span>
+                        <span class="tag">Connect</span>
+                        <span class="tag">Reset</span>
+                    </div>
                 </div>
-            </div>
             </div>
 
+            <!-- AMU -->
             <div class="instructor-card">
-            <div class="instructor-img-wrap">
-                <img src="images/profiles/fathun.jpg" alt="Fathun" class="instructor-img" />
-                <div class="instructor-overlay">
-                <p class="instructor-bio">Fathun's Barre classes are precise, energising, and never boring. Former ballet student turned fitness coach with a passion for posture.</p>
+                <div class="instructor-img-wrap">
+                    <img src="images/profiles/fathun.jpg" alt="Amu" class="instructor-img" />
+                    <div class="instructor-overlay">
+                        <p class="instructor-bio">Sweet, prepared, and guiding. Amu's classes feel safe, smooth, and well-planned — helping clients feel confident and never insecure.</p>
+                    </div>
                 </div>
-            </div>
-            <div class="instructor-info">
-                <h3>Fathun</h3>
-                <p class="class-type">Barre · Pulse</p>
-                <div class="instructor-tags">
-                <span class="tag">Barre Certified</span>
-                <span class="tag">Ballet</span>
-                <span class="tag">Posture</span>
+                <div class="instructor-info">
+                    <h3>Amu</h3>
+                    <!-- <p class="class-type">Flow · Sculpt · Soar · ReBoot</p> -->
+                    <div class="instructor-tags">
+                        <span class="tag">Flow</span>
+                        <span class="tag">Sculpt</span>
+                        <span class="tag">Soar</span>
+                        <span class="tag tag-intensity">ReBoot</span>
+                    </div>
                 </div>
-            </div>
             </div>
 
+            <!-- HAFY -->
             <div class="instructor-card">
-            <div class="instructor-img-wrap">
-                <img src="images/profiles/maryam.jpg" alt="Maryam" class="instructor-img" />
-                <div class="instructor-overlay">
-                <p class="instructor-bio">Maryam specialises in reformer and mat Pilates. Known for her sharp eye for alignment and her warm, encouraging teaching style.</p>
+                <div class="instructor-img-wrap">
+                    <img src="images/profiles/maryam.jpg" alt="Hafy" class="instructor-img" />
+                    <div class="instructor-overlay">
+                        <p class="instructor-bio">Disciplined and reliable. Hafy inspires early birds to begin their day with purpose and health — her consistency is contagious.</p>
+                    </div>
                 </div>
-            </div>
-            <div class="instructor-info">
-                <h3>Maryam</h3>
-                <p class="class-type">Reformer · Mat Pilates</p>
-                <div class="instructor-tags">
-                <span class="tag">BASI L2</span>
-                <span class="tag">Alignment</span>
-                <span class="tag">Pre-natal</span>
+                <div class="instructor-info">
+                    <h3>Hafy</h3>
+                    <!-- <p class="class-type">Flow</p> -->
+                    <div class="instructor-tags">
+                        <span class="tag">Flow</span>
+                    </div>
                 </div>
-            </div>
             </div>
 
+            <!-- SHABA -->
             <div class="instructor-card">
-            <div class="instructor-img-wrap">
-                <img src="images/profiles/aminath.jpg" alt="Aminath" class="instructor-img" />
-                <div class="instructor-overlay">
-                <p class="instructor-bio">Aminath's aerial and stretch classes feel like a release. She creates a fearless space for women to try something entirely new.</p>
+                <div class="instructor-img-wrap">
+                    <img src="images/profiles/aminath.jpg" alt="Shaba" class="instructor-img" />
+                    <div class="instructor-overlay">
+                        <p class="instructor-bio">Social and friendly, Shaba creates a warm and welcoming space for women who seek connection and belonging. Her classes feel like community.</p>
+                    </div>
                 </div>
-            </div>
-            <div class="instructor-info">
-                <h3>Aminath</h3>
-                <p class="class-type">Aerial · Soar · Stretch</p>
-                <div class="instructor-tags">
-                <span class="tag">Aerial Certified</span>
-                <span class="tag">Flexibility</span>
-                <span class="tag">Recovery</span>
+                <div class="instructor-info">
+                    <h3>Shaba</h3>
+                    <!-- <p class="class-type">Flow · Connect</p> -->
+                    <div class="instructor-tags">
+                        <span class="tag">Flow</span>
+                        <span class="tag">Connect</span>
+                    </div>
                 </div>
-            </div>
             </div>
 
+            <!-- NIYA -->
             <div class="instructor-card">
-            <div class="instructor-img-wrap">
-                <img src="images/profiles/khadeeja.jpg" alt="Khadeeja" class="instructor-img" />
-                <div class="instructor-overlay">
-                <p class="instructor-bio">Khadeeja leads ReBoot and Transform with intensity and heart. She has coached women through fitness transformations for over five years.</p>
+                <div class="instructor-img-wrap">
+                    <img src="images/profiles/khadeeja.jpg" alt="Niya" class="instructor-img" />
+                    <div class="instructor-overlay">
+                        <p class="instructor-bio">Trustworthy and consistent. Niya is loved by kids and loyal clients alike who value her calm, steady guidance in every session.</p>
+                    </div>
                 </div>
-            </div>
-            <div class="instructor-info">
-                <h3>Khadeeja</h3>
-                <p class="class-type">ReBoot · Transform</p>
-                <div class="instructor-tags">
-                <span class="tag">Strength & Conditioning</span>
-                <span class="tag">Cadillac</span>
-                <span class="tag">Weight Loss</span>
+                <div class="instructor-info">
+                    <h3>Niya</h3>
+                    <!-- <p class="class-type">Flow · Soar · Reform · Transform</p> -->
+                    <div class="instructor-tags">
+                        <span class="tag">Flow</span>
+                        <span class="tag">Soar</span>
+                        <span class="tag">Reform</span>
+                        <span class="tag">Transform</span>
+                        <span class="tag tag-kids">Fly · Kids</span>
+                    </div>
                 </div>
-            </div>
             </div>
 
+            <!-- MIRU -->
             <div class="instructor-card">
-            <div class="instructor-img-wrap">
-                <img src="images/profiles/zainab.jpg" alt="Zainab" class="instructor-img" />
-                <div class="instructor-overlay">
-                <p class="instructor-bio">Zainab has a rare gift with young movers. Patient, playful, and deeply encouraging — she creates a space where little girls feel brave enough to fly.</p>
+                <div class="instructor-img-wrap">
+                    <img src="images/profiles/zainab.jpg" alt="Miru" class="instructor-img" />
+                    <div class="instructor-overlay">
+                        <p class="instructor-bio">Dynamic and goal-oriented. Miru connects with busy women who want results, strength, and self-growth — and delivers every time.</p>
+                    </div>
+                </div>
+                <div class="instructor-info">
+                    <h3>Miru</h3>
+                    <!-- <p class="class-type">Flow · Soar · ReBoot · Bounce</p> -->
+                    <div class="instructor-tags">
+                        <span class="tag">Flow</span>
+                        <span class="tag">Soar</span>
+                        <span class="tag tag-intensity">ReBoot</span>
+                        <!-- <span class="tag tag-intensity">Bounce</span> -->
+                        <span class="tag tag-kids">Fly · Kids</span>
+                    </div>
                 </div>
             </div>
-            <div class="instructor-info">
-                <h3>Zainab</h3>
-                <p class="class-type">FLO Kids · Fly · Fusion</p>
-                <div class="instructor-tags">
-                <span class="tag">Child Development</span>
-                <span class="tag">Aerial</span>
-                <span class="tag">Ballet</span>
+
+            <!-- SHAMMA -->
+            <div class="instructor-card">
+                <div class="instructor-img-wrap">
+                    <img src="images/profiles/aisha.jpg" alt="Shamma" class="instructor-img" />
+                    <div class="instructor-overlay">
+                        <p class="instructor-bio">Caring and attentive, with a nurturing approach that makes every client feel supported. Shamma notices what others miss.</p>
+                    </div>
+                </div>
+                <div class="instructor-info">
+                    <h3>Shamma</h3>
+                    <!-- <p class="class-type">Reform · Soar · Transform</p> -->
+                    <div class="instructor-tags">
+                        <span class="tag">Reform</span>
+                        <span class="tag">Soar</span>
+                        <span class="tag">Transform</span>
+                        <span class="tag tag-kids">Fly · Kids</span>
+                    </div>
                 </div>
             </div>
+
+            <!-- SALIE -->
+            <div class="instructor-card">
+                <div class="instructor-img-wrap">
+                    <img src="images/profiles/fathun.jpg" alt="Salie" class="instructor-img" />
+                    <div class="instructor-overlay">
+                        <p class="instructor-bio">Helpful and guiding, Salie is always ready to assist, encourage, and uplift. She meets every client exactly where they are.</p>
+                    </div>
+                </div>
+                <div class="instructor-info">
+                    <h3>Salie</h3>
+                    <!-- <p class="class-type">Reform · Transform</p> -->
+                    <div class="instructor-tags">
+                        <span class="tag">Reform</span>
+                        <span class="tag">Transform</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SHIU -->
+            <div class="instructor-card">
+                <div class="instructor-img-wrap">
+                    <img src="images/profiles/maryam.jpg" alt="Shiu" class="instructor-img" />
+                    <div class="instructor-overlay">
+                        <p class="instructor-bio">Sharp and result-oriented. Shiu is focused on progress, precision, and strength — her clients know exactly what they're working toward.</p>
+                    </div>
+                </div>
+                <div class="instructor-info">
+                    <h3>Shiu</h3>
+                    <!-- <p class="class-type">Reform · ReBoot · Bounce</p> -->
+                    <div class="instructor-tags">
+                        <span class="tag">Reform</span>
+                        <span class="tag tag-intensity">ReBoot</span>
+                        <!-- <span class="tag tag-intensity">Bounce</span> -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- DHEENA -->
+            <div class="instructor-card">
+                <div class="instructor-img-wrap">
+                    <img src="images/profiles/aminath.jpg" alt="Dheena" class="instructor-img" />
+                    <div class="instructor-overlay">
+                        <p class="instructor-bio">Friendly and supportive, Dheena creates comfort, trust, and connection in every class. She makes the studio feel like a second home.</p>
+                    </div>
+                </div>
+                <div class="instructor-info">
+                    <h3>Dheena</h3>
+                    <!-- <p class="class-type">Reform · Connect</p> -->
+                    <div class="instructor-tags">
+                        <span class="tag">Reform</span>
+                        <span class="tag">Connect</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MEERA -->
+            <div class="instructor-card">
+                <div class="instructor-img-wrap">
+                    <img src="images/profiles/khadeeja.jpg" alt="Meera" class="instructor-img" />
+                    <div class="instructor-overlay">
+                        <p class="instructor-bio">Reliable, focused, and graceful. Meera motivates women who train with intention and brings nurturing patience and beauty to young ballet students.</p>
+                    </div>
+                </div>
+                <div class="instructor-info">
+                    <h3>Meera</h3>
+                    <!-- <p class="class-type">Sculpt · Reform · Transform · Ballet</p> -->
+                    <div class="instructor-tags">
+                        <span class="tag">Sculpt</span>
+                        <span class="tag">Reform</span>
+                        <span class="tag">Transform</span>
+                        <span class="tag">Ballet</span>
+                        <span class="tag tag-kids">Twirl Ballet · Kids</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ZIRA -->
+            <div class="instructor-card">
+                <div class="instructor-img-wrap">
+                    <img src="images/profiles/zainab.jpg" alt="Zira" class="instructor-img" />
+                    <div class="instructor-overlay">
+                        <p class="instructor-bio">Naturally calming, with a psychology background that helps guide breathing, quiet the mind, and leave every client in a peaceful space.</p>
+                    </div>
+                </div>
+                <div class="instructor-info">
+                    <h3>Zira</h3>
+                    <!-- <p class="class-type">Reset</p> -->
+                    <div class="instructor-tags">
+                        <span class="tag">Reset</span>
+                        <span class="tag">Breathwork</span>
+                        <span class="tag">Psychology</span>
+                    </div>
+                </div>
             </div>
 
         </div>
@@ -877,7 +1063,7 @@
                                     <div class="booking-dot booking-dot--teal"></div>
                                     <div class="booking-info">
                                         <p class="booking-name">Flow</p>
-                                        <p class="booking-meta">Vinyasa Yoga · Mon 20 Jan · 7:00 AM · Studio 1</p>
+                                        <p class="booking-meta">Mon 20 Jan · 7:00 AM · with Maani</p>
                                     </div>
                                     <span class="booking-status status--confirmed">Confirmed</span>
                                 </div>
@@ -885,17 +1071,17 @@
                                     <div class="booking-dot booking-dot--teal"></div>
                                     <div class="booking-info">
                                         <p class="booking-name">Sculpt</p>
-                                        <p class="booking-meta">Mat Pilates · Wed 22 Jan · 9:00 AM · Studio 2</p>
+                                        <p class="booking-meta">Wed 22 Jan · 9:00 AM · with Meera</p>
                                     </div>
-                                    <span class="booking-status status--confirmed">Confirmed</span>
+                                    <button class="btn-cancel">Cancel</button>
                                 </div>
                                 <div class="booking-item">
                                     <div class="booking-dot booking-dot--teal"></div>
                                     <div class="booking-info">
-                                        <p class="booking-name">Flow</p>
-                                        <p class="booking-meta">Vinyasa Yoga · Thu 23 Jan · 6:00 AM · Studio 1</p>
+                                        <p class="booking-name">Soar</p>
+                                        <p class="booking-meta">Thu 23 Jan · 6:00 PM · with Niya</p>
                                     </div>
-                                    <span class="booking-status status--confirmed">Confirmed</span>
+                                    <button class="btn-cancel">Cancel</button>
                                 </div>
                             </div>
                         </div>
@@ -904,11 +1090,47 @@
                         <div class="portal-section">
                             <h3 class="portal-section-title">Quick Actions</h3>
                             <div class="quick-actions">
-                                <button class="quick-action-btn" data-view="schedule">+ Book a Class</button>
-                                <button class="quick-action-btn" data-view="membership">View Membership</button>
+                                <button class="quick-action-btn" data-view="schedule">+ Enrol for Month</button>
+                                <button class="quick-action-btn" data-view="membership">View Enrolment</button>
                                 <button class="quick-action-btn" data-view="my-classes">My History</button>
                             </div>
                         </div>
+
+                        <!-- CHILDREN SECTION -->
+                        <div class="portal-section">
+                            <div class="children-section-header">
+                                <h3 class="portal-section-title">My Children</h3>
+                                <button class="btn-add-child" id="btnAddChild">+ Add Child</button>
+                            </div>
+
+                            <!-- Child cards render here via JS -->
+                            <div class="children-grid" id="childrenGrid">
+
+                                <!-- DUMMY: Approved child -->
+                                <div class="child-card child-card--approved">
+                                    <div class="child-avatar" style="background:#e8f4f1;">🌸</div>
+                                    <div class="child-card-info">
+                                        <p class="child-name">Amira</p>
+                                        <p class="child-meta">Age 7 · Female</p>
+                                        <span class="child-status child-status--approved">Approved</span>
+                                    </div>
+                                    <button class="child-view-btn" data-child="Amira">View →</button>
+                                </div>
+
+                                <!-- DUMMY: Pending child -->
+                                <div class="child-card child-card--pending">
+                                    <div class="child-avatar" style="background:#fdf3ee;">⭐</div>
+                                    <div class="child-card-info">
+                                        <p class="child-name">Yoosuf</p>
+                                        <p class="child-meta">Age 5 · Male</p>
+                                        <span class="child-status child-status--pending">Awaiting Approval</span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+              
                     </section>
 
                     <!-- ── VIEW: MY CLASSES ── -->
@@ -918,65 +1140,87 @@
                             <p class="portal-view-sub">Your booking history and upcoming sessions.</p>
                         </div>
 
-                        <div class="portal-section">
-                            <h3 class="portal-section-title">Upcoming</h3>
-                            <div class="booking-list">
-                                <div class="booking-item">
-                                    <div class="booking-dot booking-dot--teal"></div>
-                                    <div class="booking-info">
-                                        <p class="booking-name">Flow</p>
-                                        <p class="booking-meta">Mon 20 Jan · 7:00 AM · with Aisha</p>
+                        <!-- MY CLASSES SUB-TABS -->
+                        <!-- Sara's tab is always shown. Child tabs added by JS when approved. -->
+                        <div class="my-classes-tabs" id="myClassesTabs">
+                            <button class="my-classes-tab active" data-classes-tab="sara">Sara</button>
+                            <!-- Child tabs injected here by JS -->
+                            <button class="my-classes-tab" data-classes-tab="amira">Amira</button>
+                        </div>
+
+                        <!-- SARA'S CLASSES -->
+                        <div class="my-classes-panel active" id="classes-panel-sara">
+                            <div class="portal-section">
+                                <h3 class="portal-section-title">Upcoming</h3>
+                                <div class="booking-list">
+                                    <div class="booking-item">
+                                        <div class="booking-dot booking-dot--teal"></div>
+                                        <div class="booking-info">
+                                            <p class="booking-name">Flow</p>
+                                            <p class="booking-meta">Mon 20 Jan · 6:00 AM · with Maani</p>
+                                        </div>
+                                        <button class="btn-cancel">Cancel</button>
                                     </div>
-                                    <button class="btn-cancel">Cancel</button>
+                                    <div class="booking-item">
+                                        <div class="booking-dot booking-dot--teal"></div>
+                                        <div class="booking-info">
+                                            <p class="booking-name">Sculpt</p>
+                                            <p class="booking-meta">Wed 22 Jan · 9:00 AM · with Meera</p>
+                                        </div>
+                                        <button class="btn-cancel">Cancel</button>
+                                    </div>
+                                    <div class="booking-item">
+                                        <div class="booking-dot booking-dot--teal"></div>
+                                        <div class="booking-info">
+                                            <p class="booking-name">Soar</p>
+                                            <p class="booking-meta">Thu 23 Jan · 6:00 PM · with Niya</p>
+                                        </div>
+                                        <button class="btn-cancel">Cancel</button>
+                                    </div>
                                 </div>
-                                <div class="booking-item">
-                                    <div class="booking-dot booking-dot--teal"></div>
-                                    <div class="booking-info">
-                                        <p class="booking-name">Sculpt</p>
-                                        <p class="booking-meta">Wed 22 Jan · 9:00 AM · with Nadia</p>
+                            </div>
+
+                            <div class="portal-section">
+                                <h3 class="portal-section-title">Past Classes</h3>
+                                <div class="booking-list">
+                                    <div class="booking-item booking-item--past">
+                                        <div class="booking-dot booking-dot--muted"></div>
+                                        <div class="booking-info">
+                                            <p class="booking-name">Pulse</p>
+                                            <p class="booking-meta">Thu 16 Jan · 4:00 PM · with Maani</p>
+                                        </div>
+                                        <span class="booking-status status--attended">Attended</span>
                                     </div>
-                                    <button class="btn-cancel">Cancel</button>
-                                </div>
-                                <div class="booking-item">
-                                    <div class="booking-dot booking-dot--teal"></div>
-                                    <div class="booking-info">
-                                        <p class="booking-name">Soar</p>
-                                        <p class="booking-meta">Thu 23 Jan · 9:00 AM · with Hana</p>
+                                    <div class="booking-item booking-item--past">
+                                        <div class="booking-dot booking-dot--muted"></div>
+                                        <div class="booking-info">
+                                            <p class="booking-name">Flow</p>
+                                            <p class="booking-meta">Mon 13 Jan · 6:00 AM · with Hafy</p>
+                                        </div>
+                                        <span class="booking-status status--attended">Attended</span>
                                     </div>
-                                    <button class="btn-cancel">Cancel</button>
+                                    <div class="booking-item booking-item--past">
+                                        <div class="booking-dot booking-dot--muted"></div>
+                                        <div class="booking-info">
+                                            <p class="booking-name">Reset</p>
+                                            <p class="booking-meta">Sat 11 Jan · 8:00 PM · with Zira</p>
+                                        </div>
+                                        <span class="booking-status status--attended">Attended</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="portal-section">
-                            <h3 class="portal-section-title">Past Classes</h3>
-                            <div class="booking-list">
-                                <div class="booking-item booking-item--past">
-                                    <div class="booking-dot booking-dot--muted"></div>
-                                    <div class="booking-info">
-                                        <p class="booking-name">Pulse</p>
-                                        <p class="booking-meta">Thu 16 Jan · 6:00 PM · with Aisha</p>
-                                    </div>
-                                    <span class="booking-status status--attended">Attended</span>
-                                </div>
-                                <div class="booking-item booking-item--past">
-                                    <div class="booking-dot booking-dot--muted"></div>
-                                    <div class="booking-info">
-                                        <p class="booking-name">Flow</p>
-                                        <p class="booking-meta">Mon 13 Jan · 7:00 AM · with Aisha</p>
-                                    </div>
-                                    <span class="booking-status status--attended">Attended</span>
-                                </div>
-                                <div class="booking-item booking-item--past">
-                                    <div class="booking-dot booking-dot--muted"></div>
-                                    <div class="booking-info">
-                                        <p class="booking-name">Reset</p>
-                                        <p class="booking-meta">Sat 11 Jan · 8:00 AM · with Lara</p>
-                                    </div>
-                                    <span class="booking-status status--attended">Attended</span>
+                        <!-- AMIRA'S CLASSES (dummy approved child) -->
+                        <div class="my-classes-panel" id="classes-panel-amira">
+                            <div class="portal-section">
+                                <div class="child-classes-empty">
+                                    <p class="child-classes-empty-name">Amira has not been enrolled in any classes yet.</p>
+                                    <button class="quick-action-btn" data-view="schedule">Enrol Amira →</button>
                                 </div>
                             </div>
                         </div>
+
                     </section>
 
                     <!-- ── VIEW: SCHEDULE ── -->
@@ -1026,21 +1270,28 @@
                                     <div class="tt-cell">
                                         <button class="tt-slot available"
                                             data-class="Flow" data-day="Sun" data-time="6:00 AM"
-                                            data-price="350" data-spots="4">
+                                            data-price="350" data-spots="11">
                                             <span class="tt-slot-name">Flow</span>
-                                            <span class="tt-slot-meta">4 spots</span>
+                                            <span class="tt-slot-meta">11 spots</span>
                                         </button>
                                     </div>
                                     <div class="tt-cell">
                                         <button class="tt-slot available"
                                             data-class="Flow" data-day="Mon" data-time="6:00 AM"
-                                            data-price="350" data-spots="2">
+                                            data-price="350" data-spots="8">
                                             <span class="tt-slot-name">Flow</span>
-                                            <span class="tt-slot-meta">2 spots</span>
+                                            <span class="tt-slot-meta">8 spots</span>
                                         </button>
                                     </div>
                                     <div class="tt-cell tt-empty">—</div>
-                                    <div class="tt-cell tt-empty">—</div>
+                                    <div class="tt-cell">
+                                        <button class="tt-slot available"
+                                            data-class="Flow" data-day="Wed" data-time="6:00 AM"
+                                            data-price="350" data-spots="11">
+                                            <span class="tt-slot-name">Flow</span>
+                                            <span class="tt-slot-meta">11 spots</span>
+                                        </button>
+                                    </div>
                                     <div class="tt-cell">
                                         <button class="tt-slot available"
                                             data-class="Flow" data-day="Thu" data-time="6:00 AM"
@@ -1049,22 +1300,59 @@
                                             <span class="tt-slot-meta">5 spots</span>
                                         </button>
                                     </div>
-                                    <div class="tt-cell tt-empty">—</div>
+                                    <div class="tt-cell">
+                                        <button class="tt-slot available"
+                                            data-class="Flow" data-day="Sat" data-time="6:00 AM"
+                                            data-price="350" data-spots="11">
+                                            <span class="tt-slot-name">Flow</span>
+                                            <span class="tt-slot-meta">11 spots</span>
+                                        </button>
+                                    </div>
 
-                                    <!-- 4:00 PM row -->
-                                    <div class="tt-cell tt-time">4:00 PM</div>
+                                    <!-- 9:00 AM row -->
+                                    <div class="tt-cell tt-time">9:00 AM</div>
                                     <div class="tt-cell tt-empty">—</div>
                                     <div class="tt-cell">
                                         <button class="tt-slot available"
-                                            data-class="Pulse" data-day="Mon" data-time="4:00 PM"
-                                            data-price="600" data-spots="6">
-                                            <span class="tt-slot-name">Pulse</span>
-                                            <span class="tt-slot-meta">6 spots</span>
+                                            data-class="Sculpt" data-day="Mon" data-time="9:00 AM"
+                                            data-price="450" data-spots="11">
+                                            <span class="tt-slot-name">Sculpt</span>
+                                            <span class="tt-slot-meta">11 spots</span>
                                         </button>
                                     </div>
                                     <div class="tt-cell tt-empty">—</div>
                                     <div class="tt-cell">
                                         <button class="tt-slot available"
+                                            data-class="Sculpt" data-day="Wed" data-time="9:00 AM"
+                                            data-price="450" data-spots="9">
+                                            <span class="tt-slot-name">Sculpt</span>
+                                            <span class="tt-slot-meta">9 spots</span>
+                                        </button>
+                                    </div>
+                                    <div class="tt-cell tt-empty">—</div>
+                                    <div class="tt-cell">
+                                        <button class="tt-slot available"
+                                            data-class="Sculpt" data-day="Sat" data-time="9:00 AM"
+                                            data-price="450" data-spots="11">
+                                            <span class="tt-slot-name">Sculpt</span>
+                                            <span class="tt-slot-meta">11 spots</span>
+                                        </button>
+                                    </div>
+
+                                    <!-- 4:00 PM row -->
+                                    <div class="tt-cell tt-time">4:00 PM</div>
+                                    <div class="tt-cell tt-empty">—</div>
+                                    <div class="tt-cell">
+                                        <button class="tt-slot available tt-slot--intensity"
+                                            data-class="Pulse" data-day="Mon" data-time="4:00 PM"
+                                            data-price="600" data-spots="5">
+                                            <span class="tt-slot-name">Pulse</span>
+                                            <span class="tt-slot-meta">5 spots</span>
+                                        </button>
+                                    </div>
+                                    <div class="tt-cell tt-empty">—</div>
+                                    <div class="tt-cell">
+                                        <button class="tt-slot available tt-slot--intensity"
                                             data-class="Pulse" data-day="Wed" data-time="4:00 PM"
                                             data-price="600" data-spots="3">
                                             <span class="tt-slot-name">Pulse</span>
@@ -1073,18 +1361,25 @@
                                     </div>
                                     <div class="tt-cell tt-empty">—</div>
                                     <div class="tt-cell">
-                                        <button class="tt-slot available"
-                                            data-class="Sculpt" data-day="Sat" data-time="4:00 PM"
-                                            data-price="450" data-spots="4">
-                                            <span class="tt-slot-name">Sculpt</span>
-                                            <span class="tt-slot-meta">4 spots</span>
+                                        <button class="tt-slot available tt-slot--intensity"
+                                            data-class="Pulse" data-day="Sat" data-time="4:00 PM"
+                                            data-price="600" data-spots="5">
+                                            <span class="tt-slot-name">Pulse</span>
+                                            <span class="tt-slot-meta">5 spots</span>
                                         </button>
                                     </div>
 
                                     <!-- 6:00 PM row -->
                                     <div class="tt-cell tt-time">6:00 PM</div>
                                     <div class="tt-cell tt-empty">—</div>
-                                    <div class="tt-cell tt-empty">—</div>
+                                    <div class="tt-cell">
+                                        <button class="tt-slot available"
+                                            data-class="Soar" data-day="Mon" data-time="6:00 PM"
+                                            data-price="800" data-spots="5">
+                                            <span class="tt-slot-name">Soar</span>
+                                            <span class="tt-slot-meta">5 spots</span>
+                                        </button>
+                                    </div>
                                     <div class="tt-cell">
                                         <button class="tt-slot available"
                                             data-class="Soar" data-day="Tue" data-time="6:00 PM"
@@ -1101,38 +1396,52 @@
                                             <span class="tt-slot-meta">Full</span>
                                         </button>
                                     </div>
-                                    <div class="tt-cell tt-empty">—</div>
                                     <div class="tt-cell">
                                         <button class="tt-slot available"
-                                            data-class="Flow" data-day="Sat" data-time="6:00 PM"
-                                            data-price="350" data-spots="5">
-                                            <span class="tt-slot-name">Flow</span>
-                                            <span class="tt-slot-meta">5 spots</span>
+                                            data-class="Soar" data-day="Thu" data-time="6:00 PM"
+                                            data-price="800" data-spots="4">
+                                            <span class="tt-slot-name">Soar</span>
+                                            <span class="tt-slot-meta">4 spots</span>
                                         </button>
                                     </div>
+                                    <div class="tt-cell tt-empty">—</div>
 
                                     <!-- 8:00 PM row -->
                                     <div class="tt-cell tt-time">8:00 PM</div>
                                     <div class="tt-cell tt-empty">—</div>
                                     <div class="tt-cell">
                                         <button class="tt-slot available"
-                                            data-class="Reset" data-day="Mon" data-time="8:00 PM"
-                                            data-price="400" data-spots="7">
-                                            <span class="tt-slot-name">Reset</span>
+                                            data-class="Reform" data-day="Mon" data-time="8:00 PM"
+                                            data-price="500" data-spots="7">
+                                            <span class="tt-slot-name">Reform</span>
                                             <span class="tt-slot-meta">7 spots</span>
+                                        </button>
+                                    </div>
+                                    <div class="tt-cell">
+                                        <button class="tt-slot available tt-slot--intensity"
+                                            data-class="ReBoot" data-day="Tue" data-time="8:00 PM"
+                                            data-price="600" data-spots="5">
+                                            <span class="tt-slot-name">ReBoot</span>
+                                            <span class="tt-slot-meta">5 spots</span>
+                                        </button>
+                                    </div>
+                                    <div class="tt-cell">
+                                        <button class="tt-slot available"
+                                            data-class="Reform" data-day="Wed" data-time="8:00 PM"
+                                            data-price="500" data-spots="6">
+                                            <span class="tt-slot-name">Reform</span>
+                                            <span class="tt-slot-meta">6 spots</span>
                                         </button>
                                     </div>
                                     <div class="tt-cell tt-empty">—</div>
                                     <div class="tt-cell">
                                         <button class="tt-slot available"
-                                            data-class="Reset" data-day="Wed" data-time="8:00 PM"
-                                            data-price="400" data-spots="2">
+                                            data-class="Reset" data-day="Sat" data-time="8:00 PM"
+                                            data-price="400" data-spots="11">
                                             <span class="tt-slot-name">Reset</span>
-                                            <span class="tt-slot-meta">2 spots</span>
+                                            <span class="tt-slot-meta">11 spots</span>
                                         </button>
                                     </div>
-                                    <div class="tt-cell tt-empty">—</div>
-                                    <div class="tt-cell tt-empty">—</div>
 
                                 </div>
                                 <!-- END TIMETABLE GRID -->
@@ -1152,12 +1461,161 @@
                         </div>
                         <!-- END ADULT PANEL -->
 
-                        <!-- ══ KIDS CLASSES ══ (placeholder for now) -->
+                        <!-- ══ KIDS CLASSES ══ -->
                         <div class="enrol-panel" id="enrol-kids">
-                            <p style="padding: 40px 0; color: var(--text-light); font-size:14px;">
-                                Kids classes coming in the next step.
-                            </p>
+
+                            <!-- STEP 1: Package selection -->
+                            <div class="kids-enrol-step" id="kidsStep1">
+                                <p class="kids-step-label">Step 1 — Choose a package</p>
+
+                                <div class="kids-packages">
+                                    <div class="kids-package" id="pkgFly">
+                                        <div class="kids-package-emoji">🪁</div>
+                                        <h3 class="kids-package-name">Fly</h3>
+                                        <p class="kids-package-desc">Aerial acrobatics for kids. Builds strength, coordination, and confidence.</p>
+                                        <div class="kids-package-includes">
+                                            <span>1 aerial session / month</span>
+                                            <span>Ages 6 – 12</span>
+                                        </div>
+                                        <p class="kids-package-price">MVR 1,000 / month</p>
+                                        <button class="btn-kids-select" data-package="fly">Select Fly →</button>
+                                    </div>
+
+                                    <div class="kids-package" id="pkgFusion">
+                                        <div class="kids-package-emoji">🩰</div>
+                                        <h3 class="kids-package-name">Fusion</h3>
+                                        <p class="kids-package-desc">Ballet grace meets aerial adventure. A beautiful combination for growing girls.</p>
+                                        <div class="kids-package-includes">
+                                            <span>2 ballet sessions / month</span>
+                                            <span>1 aerial session / month</span>
+                                            <span>Ages 5 – 12</span>
+                                        </div>
+                                        <p class="kids-package-price">MVR 2,000 / month</p>
+                                        <button class="btn-kids-select" data-package="fusion">Select Fusion →</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- STEP 2: Child + session selection -->
+                            <div class="kids-enrol-step hidden" id="kidsStep2">
+                                <button class="kids-back-btn" id="kidsBackBtn">← Back to packages</button>
+
+                                <p class="kids-step-label" id="kidsStep2Label">Step 2 — Choose child &amp; sessions</p>
+
+                                <!-- CHILD SELECTOR -->
+                                <div class="kids-child-selector">
+                                    <p class="kids-selector-label">Enrolling for:</p>
+                                    <div class="kids-child-options" id="kidsChildOptions">
+                                        <!-- Approved children injected by JS -->
+                                        <button class="kids-child-btn active" data-child="Amira">
+                                            <span class="kids-child-avatar">🌸</span> Amira
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- FLY SESSIONS (shown when Fly package selected) -->
+                                <div class="kids-sessions" id="kidsSessionsFly">
+                                    <p class="kids-sessions-label">Choose 1 aerial session for the month:</p>
+                                    <div class="kids-session-list">
+                                        <label class="kids-session-item">
+                                            <input type="radio" name="flySession" value="sat-4jan" />
+                                            <div class="kids-session-info">
+                                                <span class="kids-session-name">Sat 4 Jan · 3:00 PM</span>
+                                                <span class="kids-session-meta">with Niya · 4 spots</span>
+                                            </div>
+                                        </label>
+                                        <label class="kids-session-item">
+                                            <input type="radio" name="flySession" value="sat-11jan" />
+                                            <div class="kids-session-info">
+                                                <span class="kids-session-name">Sat 11 Jan · 3:00 PM</span>
+                                                <span class="kids-session-meta">with Miru · 3 spots</span>
+                                            </div>
+                                        </label>
+                                        <label class="kids-session-item">
+                                            <input type="radio" name="flySession" value="sat-18jan" />
+                                            <div class="kids-session-info">
+                                                <span class="kids-session-name">Sat 18 Jan · 3:00 PM</span>
+                                                <span class="kids-session-meta">with Shamma · 5 spots</span>
+                                            </div>
+                                        </label>
+                                        <label class="kids-session-item">
+                                            <input type="radio" name="flySession" value="sat-25jan" />
+                                            <div class="kids-session-info">
+                                                <span class="kids-session-name">Sat 25 Jan · 3:00 PM</span>
+                                                <span class="kids-session-meta">with Niya · 5 spots</span>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <!-- FUSION SESSIONS (shown when Fusion package selected) -->
+                                <div class="kids-sessions hidden" id="kidsSessionsFusion">
+                                    <p class="kids-sessions-label">Choose 2 ballet sessions for the month:</p>
+                                    <div class="kids-session-list">
+                                        <label class="kids-session-item">
+                                            <input type="checkbox" name="balletSession" value="sun-5jan" />
+                                            <div class="kids-session-info">
+                                                <span class="kids-session-name">Sun 5 Jan · 10:00 AM</span>
+                                                <span class="kids-session-meta">Twirl Ballet · with Meera · 8 spots</span>
+                                            </div>
+                                        </label>
+                                        <label class="kids-session-item">
+                                            <input type="checkbox" name="balletSession" value="sun-12jan" />
+                                            <div class="kids-session-info">
+                                                <span class="kids-session-name">Sun 12 Jan · 10:00 AM</span>
+                                                <span class="kids-session-meta">Twirl Ballet · with Meera · 8 spots</span>
+                                            </div>
+                                        </label>
+                                        <label class="kids-session-item">
+                                            <input type="checkbox" name="balletSession" value="sun-19jan" />
+                                            <div class="kids-session-info">
+                                                <span class="kids-session-name">Sun 19 Jan · 10:00 AM</span>
+                                                <span class="kids-session-meta">Twirl Ballet · with Meera · 6 spots</span>
+                                            </div>
+                                        </label>
+                                        <label class="kids-session-item">
+                                            <input type="checkbox" name="balletSession" value="sun-26jan" />
+                                            <div class="kids-session-info">
+                                                <span class="kids-session-name">Sun 26 Jan · 10:00 AM</span>
+                                                <span class="kids-session-meta">Twirl Ballet · with Meera · 8 spots</span>
+                                            </div>
+                                        </label>
+                                    </div>
+
+                                    <p class="kids-sessions-label" style="margin-top:20px;">Choose 1 aerial session for the month:</p>
+                                    <div class="kids-session-list">
+                                        <label class="kids-session-item">
+                                            <input type="radio" name="aerialSession" value="sat-4jan" />
+                                            <div class="kids-session-info">
+                                                <span class="kids-session-name">Sat 4 Jan · 3:00 PM</span>
+                                                <span class="kids-session-meta">Fly Aerial · with Niya · 4 spots</span>
+                                            </div>
+                                        </label>
+                                        <label class="kids-session-item">
+                                            <input type="radio" name="aerialSession" value="sat-11jan" />
+                                            <div class="kids-session-info">
+                                                <span class="kids-session-name">Sat 11 Jan · 3:00 PM</span>
+                                                <span class="kids-session-meta">Fly Aerial · with Miru · 3 spots</span>
+                                            </div>
+                                        </label>
+                                        <label class="kids-session-item">
+                                            <input type="radio" name="aerialSession" value="sat-18jan" />
+                                            <div class="kids-session-info">
+                                                <span class="kids-session-name">Sat 18 Jan · 3:00 PM</span>
+                                                <span class="kids-session-meta">Fly Aerial · with Shamma · 5 spots</span>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <button class="btn-enrol btn-kids-confirm" id="btnKidsConfirm" disabled>
+                                    Confirm &amp; Enrol →
+                                </button>
+                                <p class="enrol-note">You will be contacted to arrange payment.</p>
+                            </div>
+
                         </div>
+                        <!-- END KIDS PANEL -->
 
                         <!-- SELECTION SIDEBAR -->
                         <div class="enrol-sidebar" id="enrolSidebar">
@@ -1226,6 +1684,27 @@
                                         <div class="membership-progress-fill" style="width: 66%"></div>
                                     </div>
                                     <p class="membership-progress-sub">4 classes remaining · Expires 31 Jan 2025</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- CHILDREN ENROLMENT -->
+                        <div class="portal-section">
+                            <h3 class="portal-section-title">Children</h3>
+
+                            <div class="child-membership-item">
+                                <div class="child-avatar child-avatar--sm" style="background:#e8f4f1;">🌸</div>
+                                <div class="child-membership-info">
+                                    <p class="child-membership-name">Amira</p>
+                                    <p class="child-membership-status">Not enrolled for January · <a href="#" class="child-enrol-link">Enrol now →</a></p>
+                                </div>
+                            </div>
+
+                            <div class="child-membership-item">
+                                <div class="child-avatar child-avatar--sm" style="background:#fdf3ee;">⭐</div>
+                                <div class="child-membership-info">
+                                    <p class="child-membership-name">Yoosuf</p>
+                                    <p class="child-membership-status pending-text">Awaiting admin approval</p>
                                 </div>
                             </div>
                         </div>
@@ -1684,7 +2163,175 @@
                 document.querySelectorAll('.btn-nav-settings').forEach(b => b.classList.remove('active'));
                 this.classList.add('active');
             });
-            
+
+// ══════════════════════════════════════════════════
+            // CHILDREN SYSTEM
+            // ══════════════════════════════════════════════════
+
+            // ── ADD CHILD MODAL ────────────────────────────
+            document.getElementById('btnAddChild').addEventListener('click', function() {
+                document.getElementById('addChildModal').classList.add('modal-open');
+            });
+
+            document.getElementById('addChildModalClose').addEventListener('click', function() {
+                document.getElementById('addChildModal').classList.remove('modal-open');
+            });
+
+            document.getElementById('addChildModal').addEventListener('click', function(e) {
+                if (e.target === this) this.classList.remove('modal-open');
+            });
+
+            // ── AVATAR PICKER ──────────────────────────────
+            let selectedAvatar = '🌸';
+            document.querySelectorAll('.avatar-option').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.avatar-option').forEach(b => b.classList.remove('selected'));
+                    this.classList.add('selected');
+                    selectedAvatar = this.dataset.avatar;
+                });
+            });
+
+            // ── SUBMIT CHILD FORM ─────────────────────────
+            // Max 3 children — tracked in this array
+            const children = [
+                { name: 'Amira', avatar: '🌸', avatarBg: '#e8f4f1', age: 7, gender: 'Female', status: 'approved' },
+                { name: 'Yoosuf', avatar: '⭐', avatarBg: '#fdf3ee', age: 5, gender: 'Male', status: 'pending' }
+            ];
+
+            document.getElementById('btnSubmitChild').addEventListener('click', function() {
+                const name    = document.getElementById('childName').value.trim();
+                const dob     = document.getElementById('childDob').value;
+                const gender  = document.getElementById('childGender').value;
+                const note    = document.getElementById('childFormNote');
+
+                // Validation
+                if (!name)   { note.textContent = 'Please enter the child\'s name.'; return; }
+                if (!dob)    { note.textContent = 'Please enter the date of birth.'; return; }
+                if (!gender) { note.textContent = 'Please select a gender.'; return; }
+
+                // Age check
+                const birthDate = new Date(dob);
+                const today     = new Date();
+                let age         = today.getFullYear() - birthDate.getFullYear();
+                const m         = today.getMonth() - birthDate.getMonth();
+                if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) age--;
+
+                if (age < 5)  { note.textContent = 'Children must be at least 5 years old to enrol.'; return; }
+                if (age > 12) { note.textContent = 'Kids classes are for ages 5–12. Please contact the studio directly.'; return; }
+
+                // Cap at 3 children
+                if (children.length >= 3) {
+                    note.textContent = 'Maximum of 3 children per account. Please contact the studio for assistance.';
+                    return;
+                }
+
+                // Add to children array as pending
+                children.push({ name, avatar: selectedAvatar, avatarBg: '#f5f5f5', age, gender, status: 'pending' });
+
+                // Close modal and clear form
+                document.getElementById('addChildModal').classList.remove('modal-open');
+                document.getElementById('childName').value    = '';
+                document.getElementById('childDob').value     = '';
+                document.getElementById('childGender').value  = '';
+                note.textContent = '';
+
+                alert(name + ' has been submitted for approval. The studio will be in touch shortly.');
+            });
+
+            // ── MY CLASSES SUB-TABS ────────────────────────
+            document.querySelectorAll('.my-classes-tab').forEach(function(tab) {
+                tab.addEventListener('click', function() {
+                    document.querySelectorAll('.my-classes-tab').forEach(t => t.classList.remove('active'));
+                    document.querySelectorAll('.my-classes-panel').forEach(p => p.classList.remove('active'));
+                    this.classList.add('active');
+                    const panelId = 'classes-panel-' + this.dataset.classesTab;
+                    document.getElementById(panelId).classList.add('active');
+                });
+            });
+
+            // ══════════════════════════════════════════════════
+            // KIDS ENROLMENT — Schedule tab
+            // ══════════════════════════════════════════════════
+            let selectedKidsPackage = null;
+
+            // Package selection → go to step 2
+            document.querySelectorAll('.btn-kids-select').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    selectedKidsPackage = this.dataset.package;
+
+                    // Update step 2 label
+                    const label = selectedKidsPackage === 'fly' ? 'Fly — Aerial' : 'Fusion — Ballet + Aerial';
+                    document.getElementById('kidsStep2Label').textContent = 'Step 2 — ' + label + ' · Choose sessions';
+
+                    // Show correct sessions
+                    document.getElementById('kidsSessionsFly').classList.add('hidden');
+                    document.getElementById('kidsSessionsFusion').classList.add('hidden');
+                    if (selectedKidsPackage === 'fly') {
+                        document.getElementById('kidsSessionsFly').classList.remove('hidden');
+                    } else {
+                        document.getElementById('kidsSessionsFusion').classList.remove('hidden');
+                    }
+
+                    // Switch steps
+                    document.getElementById('kidsStep1').classList.add('hidden');
+                    document.getElementById('kidsStep2').classList.remove('hidden');
+
+                    // Reset confirm button
+                    document.getElementById('btnKidsConfirm').disabled = true;
+                });
+            });
+
+            // Back button
+            document.getElementById('kidsBackBtn').addEventListener('click', function() {
+                document.getElementById('kidsStep2').classList.add('hidden');
+                document.getElementById('kidsStep1').classList.remove('hidden');
+                selectedKidsPackage = null;
+            });
+
+            // Enable confirm button when valid selection made
+            function checkKidsSelection() {
+                const btn = document.getElementById('btnKidsConfirm');
+                if (selectedKidsPackage === 'fly') {
+                    const checked = document.querySelector('input[name="flySession"]:checked');
+                    btn.disabled = !checked;
+                } else if (selectedKidsPackage === 'fusion') {
+                    const balletChecked = document.querySelectorAll('input[name="balletSession"]:checked').length;
+                    const aerialChecked = document.querySelector('input[name="aerialSession"]:checked');
+                    btn.disabled = !(balletChecked === 2 && aerialChecked);
+                }
+            }
+
+            document.querySelectorAll('input[name="flySession"], input[name="balletSession"], input[name="aerialSession"]').forEach(function(input) {
+                input.addEventListener('change', function() {
+                    // Cap ballet checkboxes at 2
+                    if (this.name === 'balletSession') {
+                        const checked = document.querySelectorAll('input[name="balletSession"]:checked');
+                        if (checked.length > 2) { this.checked = false; return; }
+                    }
+                    checkKidsSelection();
+                });
+            });
+
+            // Kids confirm button → payment modal
+            document.getElementById('btnKidsConfirm').addEventListener('click', function() {
+                const childName = document.querySelector('.kids-child-btn.active')?.textContent.trim() || 'your child';
+                const price     = selectedKidsPackage === 'fly' ? 1000 : 2000;
+                const pkgName   = selectedKidsPackage === 'fly' ? 'Fly' : 'Fusion';
+                const summary   = document.getElementById('paymentSummary');
+
+                summary.innerHTML =
+                    '<div class="payment-summary-row">' +
+                        '<span>' + childName + ' · ' + pkgName + ' package</span>' +
+                        '<span>MVR ' + price.toLocaleString() + '</span>' +
+                    '</div>' +
+                    '<div class="payment-summary-total">' +
+                        '<span>Total</span>' +
+                        '<span>MVR ' + price.toLocaleString() + '</span>' +
+                    '</div>';
+
+                document.getElementById('paymentModal').classList.add('modal-open');
+            });
+
             // ── CLIENT LOGOUT ───────────────────────────────
             document.getElementById('clientLogout').addEventListener('click', function() {
             location.reload();
