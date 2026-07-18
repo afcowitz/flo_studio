@@ -5449,33 +5449,32 @@ body {
 .admin-instr-list {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 12px;
 }
 
 .admin-instr-card {
     background: #fff;
     border: 1px solid #e8e8e4;
     border-radius: 12px;
-    padding: 22px 24px;
-    display: grid;
-    grid-template-columns: auto 1fr 1fr auto;
-    gap: 20px;
-    align-items: start;
+    overflow: hidden;
 }
 
-.admin-instr-card-left {
-    display: flex;
-    align-items: flex-start;
-    gap: 14px;
+/* Compact always-visible row */
+.admin-instr-compact {
+    display: grid;
+    grid-template-columns: auto 1fr 180px 200px auto;
+    gap: 16px;
+    align-items: start;
+    padding: 18px 20px;
 }
 
 .admin-instr-avatar {
-    width: 48px;
-    height: 48px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
     background: var(--teal-light);
     color: var(--teal);
-    font-size: 20px;
+    font-size: 18px;
     font-weight: bold;
     display: flex;
     align-items: center;
@@ -5483,16 +5482,39 @@ body {
     flex-shrink: 0;
 }
 
+.admin-instr-identity { display: flex; flex-direction: column; gap: 2px; }
+
+.admin-instr-name-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
 .admin-instr-name {
-    font-size: 16px;
+    font-size: 15px;
     font-weight: bold;
     color: var(--text-dark);
 }
+
+.btn-instr-details {
+    padding: 3px 10px;
+    background: #fff;
+    border: 1px solid #e8e8e4;
+    border-radius: 20px;
+    font-family: 'Georgia', serif;
+    font-size: 11px;
+    color: var(--text-light);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.15s;
+}
+.btn-instr-details:hover { border-color: var(--teal); color: var(--teal); }
+
 .admin-instr-nickname {
     font-size: 12px;
     color: var(--text-light);
     font-style: italic;
-    margin-top: 2px;
 }
 
 /* Status badges */
@@ -5503,28 +5525,23 @@ body {
     text-transform: uppercase;
     padding: 2px 9px;
     border-radius: 20px;
-    margin-top: 6px;
+    margin-top: 4px;
     font-weight: bold;
 }
-.instr-status--active   { background: var(--teal-light);      color: var(--teal);      }
-.instr-status--leave    { background: var(--tangerine-light);  color: var(--tangerine); }
-.instr-status--inactive { background: #f0f0ec;                 color: #999;             }
+.instr-status--active   { background: var(--teal-light);     color: var(--teal);      }
+.instr-status--leave    { background: var(--tangerine-light); color: var(--tangerine); }
+.instr-status--inactive { background: #f0f0ec;                color: #999;             }
 
-/* Details column */
-.admin-instr-card-details {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
+/* Phone column */
+.admin-instr-compact-mid {
+    padding-top: 2px;
 }
 .admin-instr-detail {
     font-size: 13px;
     color: var(--text-mid);
 }
-.admin-instr-bio {
-    font-size: 12px;
-    color: var(--text-light);
-    margin-top: 4px;
-    line-height: 1.5;
+.admin-instr-detail--empty {
+    color: #ccc;
     font-style: italic;
 }
 
@@ -5535,23 +5552,18 @@ body {
     gap: 4px;
 }
 .admin-instr-assign-label {
-    font-size: 11px;
+    font-size: 10px;
     text-transform: uppercase;
     letter-spacing: 1px;
     color: var(--text-light);
     font-weight: bold;
-    margin-bottom: 4px;
-}
-.admin-instr-card-no-assign {
-    font-size: 12px;
-    color: var(--text-light);
-    font-style: italic;
+    margin-bottom: 2px;
 }
 .instr-card-assign-prog {
-    font-size: 12px;
+    font-size: 11px;
     font-weight: bold;
     color: var(--teal);
-    margin-top: 6px;
+    margin-top: 4px;
 }
 .instr-card-no-assign {
     font-size: 12px;
@@ -5565,6 +5577,41 @@ body {
     flex-direction: column;
     gap: 6px;
     flex-shrink: 0;
+}
+
+/* Collapsible details panel */
+.admin-instr-details-panel {
+    display: none;
+    border-top: 1px solid #f0f0ec;
+    background: #fafaf8;
+    padding: 16px 20px;
+    animation: rosterSlideDown 0.2s ease;
+}
+.admin-instr-details-panel.open { display: block; }
+
+.admin-instr-details-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 14px;
+}
+.admin-instr-detail-field {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+.admin-instr-detail-field--full {
+    grid-column: 1 / -1;
+}
+.admin-instr-detail-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-light);
+    font-weight: bold;
+}
+.admin-instr-detail-value {
+    font-size: 13px;
+    color: var(--text-dark);
 }
 
 /* New instructor modal — avatar + photo note */
@@ -5636,15 +5683,166 @@ body {
 
 /* ── Mobile: Instructor cards ── */
 @media (max-width: 768px) {
-    .admin-instr-card {
-        grid-template-columns: 1fr;
-        gap: 14px;
+    .admin-instr-compact {
+        grid-template-columns: auto 1fr;
+        grid-template-rows: auto auto auto auto;
     }
-    .admin-instr-card-left {
-        align-items: center;
+    .admin-instr-compact-mid,
+    .admin-instr-assignments,
+    .admin-instr-actions {
+        grid-column: 1 / -1;
     }
     .admin-instr-actions {
         flex-direction: row;
         flex-wrap: wrap;
     }
+    .admin-instr-details-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* ══════════════════════════════════════════════════
+   ADMIN — REQUEST QUEUES (Enrolment + Sub Requests)
+══════════════════════════════════════════════════ */
+
+.admin-queue-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.admin-queue-card {
+    background: #fff;
+    border: 1px solid #e8e8e4;
+    border-radius: 12px;
+    overflow: hidden;
+}
+.admin-queue-card--resolved {
+    opacity: 0.65;
+}
+
+.admin-queue-card-top {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 18px 20px;
+}
+
+.admin-queue-type-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+}
+.admin-queue-type--adult   { background: var(--teal-light); }
+.admin-queue-type--kids    { background: #fce4ec; }
+.admin-queue-type--sub     { background: var(--tangerine-light); }
+
+.admin-queue-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+.admin-queue-name {
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--text-dark);
+}
+.admin-queue-detail {
+    font-size: 13px;
+    color: var(--text-mid);
+}
+.admin-queue-track {
+    font-size: 12px;
+    color: var(--teal);
+}
+.admin-queue-date {
+    font-size: 11px;
+    color: var(--text-light);
+    margin-top: 2px;
+    font-style: italic;
+}
+.admin-queue-decline-reason {
+    font-size: 12px;
+    color: var(--tangerine);
+    margin-top: 2px;
+}
+
+/* Status badges */
+.queue-status-badge {
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-weight: bold;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+.queue-status--pending  { background: var(--tangerine-light); color: var(--tangerine); }
+.queue-status--approved { background: var(--teal-light);      color: var(--teal);      }
+.queue-status--declined { background: #f0f0ec;                color: #999;             }
+
+/* Action row */
+.admin-queue-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 20px;
+    border-top: 1px solid #f0f0ec;
+    background: #fafaf8;
+    flex-wrap: wrap;
+}
+.btn-queue-approve {
+    padding: 8px 18px;
+    background: var(--teal);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-family: 'Georgia', serif;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background 0.15s;
+    white-space: nowrap;
+}
+.btn-queue-approve:hover { background: var(--teal-dark); }
+.btn-queue-decline {
+    padding: 8px 18px;
+    background: #fff;
+    color: var(--tangerine);
+    border: 1px solid var(--tangerine);
+    border-radius: 6px;
+    font-family: 'Georgia', serif;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.15s;
+    white-space: nowrap;
+}
+.btn-queue-decline:hover { background: var(--tangerine-light); }
+
+.admin-queue-decline-wrap {
+    display: flex;
+    gap: 8px;
+    flex: 1;
+    min-width: 200px;
+}
+.admin-queue-decline-input {
+    flex: 1;
+}
+
+@media (max-width: 768px) {
+    .admin-queue-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .admin-queue-decline-wrap {
+        flex-direction: column;
+    }
+    .btn-queue-approve,
+    .btn-queue-decline { text-align: center; }
 }

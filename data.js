@@ -452,6 +452,98 @@ const aerialSwapRequests = [
 
 
 /* ────────────────────────────────────────────────────────────
+   PENDING ENROLMENT REQUESTS
+   Submitted by clients via the client portal enrolment flow.
+   Admin reviews and approves or declines each request.
+
+   type: "adult" | "kids"
+   status: "pending" | "approved" | "declined"
+   For kids: programId + trackLabel
+   For adult: classId (standalone class slot)
+──────────────────────────────────────────────────────────── */
+const pendingEnrolments = [
+    {
+        id: "enr-req-001",
+        clientName: "Aminath Laila",
+        type: "adult",
+        classId: "flow",
+        details: "Flow — Mon & Wed 8:00 AM",
+        submittedDate: "2026-06-10",
+        status: "pending",
+        declineReason: ""
+    },
+    {
+        id: "enr-req-002",
+        clientName: "Khadeeja Ibrahim",
+        type: "adult",
+        classId: "reboot",
+        details: "ReBoot — Sat 8:00 AM",
+        submittedDate: "2026-06-11",
+        status: "pending",
+        declineReason: ""
+    },
+    {
+        id: "enr-req-003",
+        clientName: "Fathimath Yoosuf",
+        type: "kids",
+        childName: "Layla",
+        programId: "kids-fusion",
+        trackLabel: "satmon",
+        details: "Fusion — Sat & Mon Ballet + Wed Aerial",
+        submittedDate: "2026-06-12",
+        status: "pending",
+        declineReason: ""
+    },
+    {
+        id: "enr-req-004",
+        clientName: "Raina Hassan",
+        type: "kids",
+        childName: "Sana",
+        programId: "kids-aerial-only",
+        trackLabel: "sat",
+        details: "Aerial (Standalone) — Saturday 10:00 AM",
+        submittedDate: "2026-06-13",
+        status: "pending",
+        declineReason: ""
+    },
+    {
+        id: "enr-req-005",
+        clientName: "Maryam Ali",
+        type: "adult",
+        classId: "sculpt",
+        details: "Sculpt — Wed 9:00 AM",
+        submittedDate: "2026-06-09",
+        status: "approved",
+        declineReason: ""
+    }
+];
+
+
+/* ────────────────────────────────────────────────────────────
+   PENDING SUB REQUESTS
+   Submitted by instructors via the instructor portal.
+   Admin reviews, confirms the substitute, which updates
+   the relevant slot for that specific date.
+
+   status: "pending" | "confirmed" | "declined"
+──────────────────────────────────────────────────────────── */
+const pendingSubRequests = [
+    {
+        id: "sub-req-001",
+        instructorId: "amu",
+        className: "Soar",
+        classDay: "Thu",
+        classTime: "18:00",
+        coverDate: "2026-06-19",
+        agreedSubId: "hafy",
+        note: "Travelling that week, apologies for the short notice.",
+        submittedDate: "2026-06-10",
+        status: "pending"
+    }
+];
+
+
+/* ────────────────────────────────────────────────────────────
    COLOR KEY → CSS CLASS MAP
    Single source of truth so the timetable rendering and the
    legend never drift out of sync.

@@ -2622,23 +2622,8 @@
 
                         <div class="portal-section">
                             <h3 class="portal-section-title">Needs Your Attention</h3>
-                            <div class="booking-list">
-                                <div class="booking-item">
-                                    <div class="booking-dot booking-dot--tangerine"></div>
-                                    <div class="booking-info">
-                                        <p class="booking-name">2 enrolment requests awaiting approval</p>
-                                        <p class="booking-meta">Kids enrolment · pending review</p>
-                                    </div>
-                                    <button class="quick-action-btn" data-aview="enrolment-requests">Review →</button>
-                                </div>
-                                <div class="booking-item">
-                                    <div class="booking-dot booking-dot--tangerine"></div>
-                                    <div class="booking-info">
-                                        <p class="booking-name">1 sub request awaiting confirmation</p>
-                                        <p class="booking-meta">Soar · Thu 19 Jun · covered by Hafy</p>
-                                    </div>
-                                    <button class="quick-action-btn" data-aview="sub-requests">Review →</button>
-                                </div>
+                            <div class="booking-list" id="adminAttentionList">
+                                <!-- Populated by JS -->
                             </div>
                         </div>
 
@@ -2717,28 +2702,45 @@
                     </section>
 
                     <!-- ── VIEW: ENROLMENT REQUESTS (placeholder — Stage D) ── -->
+                    <!-- ── VIEW: ENROLMENT REQUESTS ── -->
                     <section class="portal-view" id="aview-enrolment-requests">
                         <div class="portal-view-header">
                             <h2>Enrolment Requests</h2>
-                            <p class="portal-view-sub">Approve or decline pending client and kids enrolments.</p>
+                            <p class="portal-view-sub">Review and approve pending enrolment requests from clients.</p>
                         </div>
-                        <div class="admin-coming-soon">
-                            <p class="admin-coming-soon-icon">✎</p>
-                            <p class="admin-coming-soon-title">Enrolment approval is coming soon</p>
-                            <p class="admin-coming-soon-sub">Review and approve pending enrolment requests from the client portal here.</p>
+
+                        <div class="admin-section-toolbar">
+                            <div class="admin-audience-tabs">
+                                <button class="admin-enr-filter active" data-enr-status="pending">Pending <span class="admin-badge" id="enrPendingCount">–</span></button>
+                                <button class="admin-enr-filter" data-enr-status="approved">Approved</button>
+                                <button class="admin-enr-filter" data-enr-status="declined">Declined</button>
+                                <button class="admin-enr-filter" data-enr-status="all">All</button>
+                            </div>
+                        </div>
+
+                        <div class="admin-queue-list" id="enrolmentRequestList">
+                            <!-- Populated by JS -->
                         </div>
                     </section>
 
-                    <!-- ── VIEW: SUB REQUESTS (placeholder — Stage E) ── -->
+                    <!-- ── VIEW: SUB REQUESTS ── -->
                     <section class="portal-view" id="aview-sub-requests">
                         <div class="portal-view-header">
                             <h2>Sub Requests</h2>
                             <p class="portal-view-sub">Confirm substitute requests submitted by instructors.</p>
                         </div>
-                        <div class="admin-coming-soon">
-                            <p class="admin-coming-soon-icon">⇄</p>
-                            <p class="admin-coming-soon-title">Sub request confirmation is coming soon</p>
-                            <p class="admin-coming-soon-sub">Review requests instructors have submitted and confirm the agreed substitute.</p>
+
+                        <div class="admin-section-toolbar">
+                            <div class="admin-audience-tabs">
+                                <button class="admin-sub-filter active" data-sub-status="pending">Pending <span class="admin-badge" id="subPendingCount">–</span></button>
+                                <button class="admin-sub-filter" data-sub-status="confirmed">Confirmed</button>
+                                <button class="admin-sub-filter" data-sub-status="declined">Declined</button>
+                                <button class="admin-sub-filter" data-sub-status="all">All</button>
+                            </div>
+                        </div>
+
+                        <div class="admin-queue-list" id="subRequestList">
+                            <!-- Populated by JS -->
                         </div>
                     </section>
 
@@ -3785,20 +3787,64 @@
             function buildAdminDashboardStats() {
                 if (typeof classes === 'undefined') return;
 
-                const activeClasses = classes.filter(c => c.id !== undefined).length;
+                const activeClasses = classes.filter(c => c.active !== false).length;
                 document.getElementById('adminStatClasses').textContent = activeClasses;
 
                 document.getElementById('adminStatPrograms').textContent =
-                    (typeof programs !== 'undefined') ? programs.length : '–';
+                    (typeof programs !== 'undefined') ? programs.filter(p => p.active !== false).length : '–';
 
                 document.getElementById('adminStatInstructors').textContent =
-                    (typeof instructors !== 'undefined') ? instructors.length : '–';
+                    (typeof instructors !== 'undefined') ? instructors.filter(i => i.status !== 'inactive').length : '–';
 
-                // Pending = enrolment requests (placeholder count) + sub requests (placeholder count)
-                // Stage D/E will wire these to real pending-status data.
-                const pendingEnrolment = 2;
-                const pendingSubs = 1;
+                const pendingEnrolment = typeof pendingEnrolments !== 'undefined'
+                    ? pendingEnrolments.filter(r => r.status === 'pending').length : 0;
+                const pendingSubs = typeof pendingSubRequests !== 'undefined'
+                    ? pendingSubRequests.filter(r => r.status === 'pending').length : 0;
                 document.getElementById('adminStatPending').textContent = pendingEnrolment + pendingSubs;
+
+                // Build the attention list dynamically
+                const attentionEl = document.getElementById('adminAttentionList');
+                if (attentionEl) {
+                    let html = '';
+                    if (pendingEnrolment > 0) {
+                        html += '<div class="booking-item">' +
+                            '<div class="booking-dot booking-dot--tangerine"></div>' +
+                            '<div class="booking-info">' +
+                                '<p class="booking-name">' + pendingEnrolment + ' enrolment request' + (pendingEnrolment > 1 ? 's' : '') + ' awaiting approval</p>' +
+                                '<p class="booking-meta">Review and approve client enrolments</p>' +
+                            '</div>' +
+                            '<button class="quick-action-btn" data-aview="enrolment-requests">Review →</button>' +
+                        '</div>';
+                    }
+                    if (pendingSubs > 0) {
+                        const firstSub = pendingSubRequests.find(r => r.status === 'pending');
+                        const subInstr = firstSub ? getInstructor(firstSub.agreedSubId) : null;
+                        html += '<div class="booking-item">' +
+                            '<div class="booking-dot booking-dot--tangerine"></div>' +
+                            '<div class="booking-info">' +
+                                '<p class="booking-name">' + pendingSubs + ' sub request' + (pendingSubs > 1 ? 's' : '') + ' awaiting confirmation</p>' +
+                                (firstSub ? '<p class="booking-meta">' + firstSub.className + ' · ' + firstSub.classDay + ' ' + firstSub.coverDate + (subInstr ? ' · covered by ' + subInstr.name : '') + '</p>' : '') +
+                            '</div>' +
+                            '<button class="quick-action-btn" data-aview="sub-requests">Review →</button>' +
+                        '</div>';
+                    }
+                    if (!html) {
+                        html = '<p class="admin-empty-note" style="padding:16px 0;">Nothing needs attention right now. 🎉</p>';
+                    }
+                    attentionEl.innerHTML = html;
+
+                    // Re-wire quick action buttons in attention list
+                    attentionEl.querySelectorAll('.quick-action-btn[data-aview]').forEach(function(btn) {
+                        btn.addEventListener('click', function() {
+                            const targetView = this.getAttribute('data-aview');
+                            document.querySelectorAll('.admin-sidebar-link').forEach(l => l.classList.remove('active'));
+                            const sidebarLink = document.querySelector('.admin-sidebar-link[data-aview="' + targetView + '"]');
+                            if (sidebarLink) sidebarLink.classList.add('active');
+                            document.querySelectorAll('#adminPortal .portal-view').forEach(v => v.classList.remove('active'));
+                            document.getElementById('aview-' + targetView).classList.add('active');
+                        });
+                    });
+                }
             }
             buildAdminDashboardStats();
 
@@ -4113,31 +4159,60 @@
                     }
 
                     html += '<div class="admin-instr-card" data-instr-id="' + instr.id + '">' +
-                        '<div class="admin-instr-card-left">' +
+
+                        // ── Always-visible compact row ──
+                        '<div class="admin-instr-compact">' +
                             '<div class="admin-instr-avatar">' + initials + '</div>' +
-                            '<div>' +
-                                '<p class="admin-instr-name">' + instr.name + '</p>' +
+                            '<div class="admin-instr-identity">' +
+                                '<div class="admin-instr-name-row">' +
+                                    '<p class="admin-instr-name">' + instr.name + '</p>' +
+                                    '<button class="btn-instr-details" data-instr-id="' + instr.id + '">Details ▾</button>' +
+                                '</div>' +
                                 (instr.nickname && instr.nickname !== instr.name
                                     ? '<p class="admin-instr-nickname">"' + instr.nickname + '"</p>' : '') +
                                 '<span class="instr-status-badge ' + statusInfo.cls + '">' + statusInfo.label + '</span>' +
                             '</div>' +
+                            '<div class="admin-instr-compact-mid">' +
+                                (instr.phone ? '<p class="admin-instr-detail">📞 ' + instr.phone + '</p>' : '<p class="admin-instr-detail admin-instr-detail--empty">No phone on file</p>') +
+                            '</div>' +
+                            '<div class="admin-instr-assignments">' +
+                                '<p class="admin-instr-assign-label">Assignments</p>' +
+                                assignHtml +
+                            '</div>' +
+                            '<div class="admin-instr-actions">' +
+                                '<button class="btn-admin-edit-class" data-instr-id="' + instr.id + '">Edit</button>' +
+                                (instr.status !== 'inactive'
+                                    ? '<button class="btn-admin-delete-class" data-instr-id="' + instr.id + '">Deactivate</button>'
+                                    : '<button class="btn-admin-reactivate" data-instr-id="' + instr.id + '">Reactivate</button>') +
+                            '</div>' +
                         '</div>' +
-                        '<div class="admin-instr-card-details">' +
-                            (instr.phone ? '<p class="admin-instr-detail">📞 ' + instr.phone + '</p>' : '') +
-                            (instr.qualifications ? '<p class="admin-instr-detail">🎓 ' + instr.qualifications + '</p>' : '') +
-                            (instr.experience ? '<p class="admin-instr-detail">⏱ ' + instr.experience + '</p>' : '') +
-                            (instr.bio ? '<p class="admin-instr-bio">' + instr.bio + '</p>' : '') +
+
+                        // ── Collapsible details panel ──
+                        '<div class="admin-instr-details-panel" id="instrDetails-' + instr.id + '">' +
+                            '<div class="admin-instr-details-grid">' +
+                                '<div class="admin-instr-detail-field">' +
+                                    '<p class="admin-instr-detail-label">Date of Birth</p>' +
+                                    '<p class="admin-instr-detail-value">' + (instr.dob || '—') + '</p>' +
+                                '</div>' +
+                                '<div class="admin-instr-detail-field">' +
+                                    '<p class="admin-instr-detail-label">National ID</p>' +
+                                    '<p class="admin-instr-detail-value">' + (instr.nationalId || '—') + '</p>' +
+                                '</div>' +
+                                '<div class="admin-instr-detail-field">' +
+                                    '<p class="admin-instr-detail-label">Qualifications</p>' +
+                                    '<p class="admin-instr-detail-value">' + (instr.qualifications || '—') + '</p>' +
+                                '</div>' +
+                                '<div class="admin-instr-detail-field">' +
+                                    '<p class="admin-instr-detail-label">Experience</p>' +
+                                    '<p class="admin-instr-detail-value">' + (instr.experience || '—') + '</p>' +
+                                '</div>' +
+                                (instr.bio ? '<div class="admin-instr-detail-field admin-instr-detail-field--full">' +
+                                    '<p class="admin-instr-detail-label">Bio</p>' +
+                                    '<p class="admin-instr-detail-value">' + instr.bio + '</p>' +
+                                '</div>' : '') +
+                            '</div>' +
                         '</div>' +
-                        '<div class="admin-instr-assignments">' +
-                            '<p class="admin-instr-assign-label">Current assignments</p>' +
-                            assignHtml +
-                        '</div>' +
-                        '<div class="admin-instr-actions">' +
-                            '<button class="btn-admin-edit-class" data-instr-id="' + instr.id + '">Edit</button>' +
-                            (instr.status !== 'inactive'
-                                ? '<button class="btn-admin-delete-class" data-instr-id="' + instr.id + '">Deactivate</button>'
-                                : '<button class="btn-admin-reactivate" data-instr-id="' + instr.id + '">Reactivate</button>') +
-                        '</div>' +
+
                     '</div>';
                 });
 
@@ -4147,6 +4222,27 @@
                 container.querySelectorAll('.btn-admin-edit-class[data-instr-id]').forEach(function(btn) {
                     btn.addEventListener('click', function() {
                         openEditInstructorModal(this.getAttribute('data-instr-id'));
+                    });
+                });
+
+                // Wire Details ▾ toggle buttons
+                container.querySelectorAll('.btn-instr-details').forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        const instrId = this.getAttribute('data-instr-id');
+                        const panel = document.getElementById('instrDetails-' + instrId);
+                        if (!panel) return;
+                        const isOpen = panel.classList.contains('open');
+                        // Close any other open panels
+                        container.querySelectorAll('.admin-instr-details-panel.open').forEach(function(p) {
+                            if (p !== panel) {
+                                p.classList.remove('open');
+                                const otherId = p.id.replace('instrDetails-', '');
+                                const otherBtn = container.querySelector('.btn-instr-details[data-instr-id="' + otherId + '"]');
+                                if (otherBtn) otherBtn.textContent = 'Details ▾';
+                            }
+                        });
+                        panel.classList.toggle('open', !isOpen);
+                        this.textContent = isOpen ? 'Details ▾' : 'Details ▲';
                     });
                 });
 
@@ -4298,6 +4394,221 @@
             // Build on page load (called when admin navigates to Instructors view
             // via the sidebar — also called immediately so counts are right)
             buildAdminInstructorList();
+
+            // ══════════════════════════════════════════════════
+            // ENROLMENT REQUESTS
+            // ══════════════════════════════════════════════════
+
+            let enrFilterStatus = 'pending';
+
+            function countPendingEnrolments() {
+                return pendingEnrolments.filter(r => r.status === 'pending').length;
+            }
+
+            function updateEnrBadges() {
+                const count = countPendingEnrolments();
+                const badge = document.getElementById('enrPendingCount');
+                if (badge) badge.textContent = count;
+                const sidebarBadge = document.getElementById('enrolReqBadge');
+                if (sidebarBadge) sidebarBadge.textContent = count;
+            }
+
+            function buildEnrolmentRequestList() {
+                const container = document.getElementById('enrolmentRequestList');
+                if (!container) return;
+
+                const filtered = pendingEnrolments.filter(function(r) {
+                    return enrFilterStatus === 'all' || r.status === enrFilterStatus;
+                });
+
+                if (filtered.length === 0) {
+                    container.innerHTML = '<p class="admin-empty-note">No ' + (enrFilterStatus === 'all' ? '' : enrFilterStatus + ' ') + 'enrolment requests.</p>';
+                    return;
+                }
+
+                let html = '';
+                filtered.forEach(function(req) {
+                    const isKids = req.type === 'kids';
+                    const trackObj = req.trackLabel ? getTrackByLabel(req.trackLabel) : null;
+                    const prog = req.programId ? getProgram(req.programId) : null;
+                    const statusCls = req.status === 'approved' ? 'queue-status--approved'
+                        : req.status === 'declined' ? 'queue-status--declined' : 'queue-status--pending';
+                    const statusLabel = req.status === 'approved' ? 'Approved'
+                        : req.status === 'declined' ? 'Declined' : 'Pending';
+
+                    html += '<div class="admin-queue-card' + (req.status !== 'pending' ? ' admin-queue-card--resolved' : '') + '" data-req-id="' + req.id + '">' +
+                        '<div class="admin-queue-card-top">' +
+                            '<div class="admin-queue-type-icon ' + (isKids ? 'admin-queue-type--kids' : 'admin-queue-type--adult') + '">' +
+                                (isKids ? '🧒' : '🧘') +
+                            '</div>' +
+                            '<div class="admin-queue-info">' +
+                                '<p class="admin-queue-name">' + req.clientName + (isKids ? ' — for <strong>' + req.childName + '</strong>' : '') + '</p>' +
+                                '<p class="admin-queue-detail">' + req.details + '</p>' +
+                                (trackObj ? '<p class="admin-queue-track">Track: ' + trackObj.name + ' (' + trackObj.days.join(', ') + ')</p>' : '') +
+                                '<p class="admin-queue-date">Submitted ' + req.submittedDate + '</p>' +
+                                (req.declineReason ? '<p class="admin-queue-decline-reason">Declined: ' + req.declineReason + '</p>' : '') +
+                            '</div>' +
+                            '<span class="queue-status-badge ' + statusCls + '">' + statusLabel + '</span>' +
+                        '</div>' +
+                        (req.status === 'pending' ?
+                            '<div class="admin-queue-actions">' +
+                                '<button class="btn-queue-approve" data-req-id="' + req.id + '">✓ Approve</button>' +
+                                '<div class="admin-queue-decline-wrap">' +
+                                    '<input type="text" class="admin-panel-input admin-queue-decline-input" id="enrDeclineReason-' + req.id + '" placeholder="Reason for declining (optional)" />' +
+                                    '<button class="btn-queue-decline" data-req-id="' + req.id + '">✕ Decline</button>' +
+                                '</div>' +
+                            '</div>' : '') +
+                    '</div>';
+                });
+
+                container.innerHTML = html;
+
+                // Wire approve buttons
+                container.querySelectorAll('.btn-queue-approve').forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        const req = pendingEnrolments.find(r => r.id === this.getAttribute('data-req-id'));
+                        if (!req) return;
+                        req.status = 'approved';
+                        buildEnrolmentRequestList();
+                        updateEnrBadges();
+                        buildAdminDashboardStats();
+                    });
+                });
+
+                // Wire decline buttons
+                container.querySelectorAll('.btn-queue-decline').forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        const reqId = this.getAttribute('data-req-id');
+                        const req = pendingEnrolments.find(r => r.id === reqId);
+                        if (!req) return;
+                        const reasonInput = document.getElementById('enrDeclineReason-' + reqId);
+                        req.declineReason = reasonInput ? reasonInput.value.trim() : '';
+                        req.status = 'declined';
+                        buildEnrolmentRequestList();
+                        updateEnrBadges();
+                        buildAdminDashboardStats();
+                    });
+                });
+
+                updateEnrBadges();
+            }
+
+            // Filter tabs
+            document.querySelectorAll('.admin-enr-filter').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.admin-enr-filter').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    enrFilterStatus = this.getAttribute('data-enr-status');
+                    buildEnrolmentRequestList();
+                });
+            });
+
+            buildEnrolmentRequestList();
+
+            // ══════════════════════════════════════════════════
+            // SUB REQUESTS
+            // ══════════════════════════════════════════════════
+
+            let subFilterStatus = 'pending';
+
+            function countPendingSubRequests() {
+                return pendingSubRequests.filter(r => r.status === 'pending').length;
+            }
+
+            function updateSubBadges() {
+                const count = countPendingSubRequests();
+                const badge = document.getElementById('subPendingCount');
+                if (badge) badge.textContent = count;
+                const sidebarBadge = document.getElementById('adminSubReqBadge');
+                if (sidebarBadge) sidebarBadge.textContent = count;
+            }
+
+            function buildSubRequestList() {
+                const container = document.getElementById('subRequestList');
+                if (!container) return;
+
+                const filtered = pendingSubRequests.filter(function(r) {
+                    return subFilterStatus === 'all' || r.status === subFilterStatus;
+                });
+
+                if (filtered.length === 0) {
+                    container.innerHTML = '<p class="admin-empty-note">No ' + (subFilterStatus === 'all' ? '' : subFilterStatus + ' ') + 'sub requests.</p>';
+                    return;
+                }
+
+                let html = '';
+                filtered.forEach(function(req) {
+                    const instr = getInstructor(req.instructorId);
+                    const sub   = getInstructor(req.agreedSubId);
+                    const statusCls = req.status === 'confirmed' ? 'queue-status--approved'
+                        : req.status === 'declined' ? 'queue-status--declined' : 'queue-status--pending';
+                    const statusLabel = req.status === 'confirmed' ? 'Confirmed'
+                        : req.status === 'declined' ? 'Declined' : 'Pending';
+
+                    html += '<div class="admin-queue-card' + (req.status !== 'pending' ? ' admin-queue-card--resolved' : '') + '" data-sub-id="' + req.id + '">' +
+                        '<div class="admin-queue-card-top">' +
+                            '<div class="admin-queue-type-icon admin-queue-type--sub">⇄</div>' +
+                            '<div class="admin-queue-info">' +
+                                '<p class="admin-queue-name">' + (instr ? instr.name : req.instructorId) + ' — <strong>' + req.className + '</strong></p>' +
+                                '<p class="admin-queue-detail">' + req.classDay + ' · ' + formatTime12h(req.classTime) + ' · covering date: ' + req.coverDate + '</p>' +
+                                '<p class="admin-queue-track">Agreed substitute: <strong>' + (sub ? sub.name : req.agreedSubId) + '</strong></p>' +
+                                (req.note ? '<p class="admin-queue-date">"' + req.note + '"</p>' : '') +
+                                '<p class="admin-queue-date">Submitted ' + req.submittedDate + '</p>' +
+                            '</div>' +
+                            '<span class="queue-status-badge ' + statusCls + '">' + statusLabel + '</span>' +
+                        '</div>' +
+                        (req.status === 'pending' ?
+                            '<div class="admin-queue-actions">' +
+                                '<button class="btn-queue-approve" data-sub-id="' + req.id + '">✓ Confirm Sub</button>' +
+                                '<button class="btn-queue-decline" data-sub-id="' + req.id + '">✕ Decline</button>' +
+                            '</div>' : '') +
+                    '</div>';
+                });
+
+                container.innerHTML = html;
+
+                // Wire confirm buttons
+                container.querySelectorAll('.btn-queue-approve[data-sub-id]').forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        const req = pendingSubRequests.find(r => r.id === this.getAttribute('data-sub-id'));
+                        if (!req) return;
+                        req.status = 'confirmed';
+                        // Note: in a real backend this would update the slot's instructorId
+                        // for the specific coverDate. For now we just update the status.
+                        buildSubRequestList();
+                        updateSubBadges();
+                        buildAdminDashboardStats();
+                    });
+                });
+
+                // Wire decline buttons
+                container.querySelectorAll('.btn-queue-decline[data-sub-id]').forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        const req = pendingSubRequests.find(r => r.id === this.getAttribute('data-sub-id'));
+                        if (!req) return;
+                        if (confirm('Decline this sub request? ' + (getInstructor(req.instructorId) || {name: req.instructorId}).name + ' will need to cover their class.')) {
+                            req.status = 'declined';
+                            buildSubRequestList();
+                            updateSubBadges();
+                            buildAdminDashboardStats();
+                        }
+                    });
+                });
+
+                updateSubBadges();
+            }
+
+            // Filter tabs
+            document.querySelectorAll('.admin-sub-filter').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.admin-sub-filter').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    subFilterStatus = this.getAttribute('data-sub-status');
+                    buildSubRequestList();
+                });
+            });
+
+            buildSubRequestList();
 
             // ── CLASSES: build the list for a given audience ──
             // Track whether to show inactive (soft-deleted) classes
