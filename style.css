@@ -5637,7 +5637,9 @@ body {
 }
 
 /* Filter tabs (Active / On Leave / All) reuse admin-audience-tab styles */
-.admin-instr-filter {
+.admin-instr-filter,
+.admin-enr-filter,
+.admin-sub-filter {
     padding: 8px 18px;
     border: 1px solid #e8e8e4;
     border-radius: 20px;
@@ -5647,9 +5649,21 @@ body {
     color: var(--text-mid);
     cursor: pointer;
     transition: all 0.15s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
 }
-.admin-instr-filter:hover    { border-color: var(--teal); color: var(--teal); }
-.admin-instr-filter.active   { background: var(--teal); border-color: var(--teal); color: #fff; }
+.admin-instr-filter:hover,
+.admin-enr-filter:hover,
+.admin-sub-filter:hover    { border-color: var(--teal); color: var(--teal); }
+.admin-instr-filter.active,
+.admin-enr-filter.active,
+.admin-sub-filter.active   { background: var(--teal); border-color: var(--teal); color: #fff; }
+.admin-enr-filter.active .admin-badge,
+.admin-sub-filter.active .admin-badge {
+    background: rgba(255,255,255,0.3);
+    color: #fff;
+}
 
 /* ══════════════════════════════════════════════════
    INSTRUCTOR PORTAL — ON-LEAVE NOTICE
