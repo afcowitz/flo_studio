@@ -498,14 +498,11 @@ body {
 .class-icon-img {
   width: 80px;
   height: 80px;
-  filter: invert(51%) sepia(49%) saturate(412%) hue-rotate(127deg) brightness(110%) contrast(75%);
-  transition: filter 0.3s ease;
+  transition: transform 0.3s ease;
 }
 
-.class-card:hover .class-icon-img {
-  filter: invert(51%) sepia(49%) saturate(412%) hue-rotate(127deg) brightness(110%) contrast(75%);
-}
-
+/* ReBoot highlight card has a tangerine background, so its icon is forced
+   to white for contrast — this works regardless of the icon's own color. */
 .highlight-card .class-icon-img {
   filter: brightness(0) invert(1);
 }
@@ -518,7 +515,6 @@ body {
 .kids-icon-img {
   width: 48px;
   height: 48px;
-  filter: invert(48%) sepia(78%) saturate(431%) hue-rotate(331deg) brightness(95%) contrast(92%);
 }
 
 /* ── ABOUT ── */
